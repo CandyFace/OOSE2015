@@ -17,6 +17,10 @@ public class SimpleSlickGame extends BasicGame
 	
 	private Image player = null;
 	private Color white = new Color(255,255,255);
+	private int speed = 10;
+	
+	
+	public 
 	
 	public SimpleSlickGame(String gamename)
 	{
@@ -27,6 +31,10 @@ public class SimpleSlickGame extends BasicGame
 	public void init(GameContainer gc) throws SlickException {
 		
 		player = new Image("graphics/playerWhite.png");
+		
+		if(input.isKeyDown(Input.KEY_UP)) {
+			
+		}
 	}
 
 	@Override
@@ -38,7 +46,7 @@ public class SimpleSlickGame extends BasicGame
 		g.drawString("Hello World!", 250, 200);
 		g.drawString("This is bad", 200,100);
 		
-		player.draw(50f,50f,0.3f);
+		player.draw(50f,50f,0.05f);
 	}
 
 	public static void main(String[] args)
