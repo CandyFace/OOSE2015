@@ -1,23 +1,33 @@
 package example;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 //Det virker! Nu vi klar!
 
 public class SimpleSlickGame extends BasicGame
 {
+	
+	private Image player = null;
+	private Color white = new Color(255,255,255);
+	
 	public SimpleSlickGame(String gamename)
 	{
 		super(gamename);
 	}
 
 	@Override
-	public void init(GameContainer gc) throws SlickException {}
+	public void init(GameContainer gc) throws SlickException {
+		
+		player = new Image("graphics/playerWhite.png");
+	}
 
 	@Override
 	public void update(GameContainer gc, int i) throws SlickException {}
@@ -27,6 +37,8 @@ public class SimpleSlickGame extends BasicGame
 	{
 		g.drawString("Hello World!", 250, 200);
 		g.drawString("This is bad", 200,100);
+		
+		player.draw(50f,50f,0.3f);
 	}
 
 	public static void main(String[] args)
