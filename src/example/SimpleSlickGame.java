@@ -1,9 +1,7 @@
 package example;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.vecmath.Vector2f;
-
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;

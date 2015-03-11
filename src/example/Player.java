@@ -1,8 +1,6 @@
 package example;
 
 import javax.vecmath.Vector2f;
-
-import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 
 public class Player {
