@@ -8,6 +8,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
 //TEST
+//Hej
 
 public class SimpleSlickGame extends BasicGame
 {
