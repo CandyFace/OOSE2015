@@ -15,6 +15,7 @@ public class SimpleSlickGame extends BasicGame
 	public Image playerSprite;
 	public float direction;
 	Player playerObject = new Player();
+	public Asteroids asteroid;
 
 	
 	public SimpleSlickGame(String gamename)
@@ -31,6 +32,7 @@ public class SimpleSlickGame extends BasicGame
 		playerSprite = new Image("graphics/playerWhite.png");
 		playerSprite.setCenterOfRotation(playerSprite.getWidth() * playerObject.scale / 2, playerSprite.getHeight() * playerObject.scale / 2); //Set the origin of the player sprite
 		
+		 asteroid = new Asteroids(5f,5f);
 	}
 
 	@Override
@@ -42,6 +44,9 @@ public class SimpleSlickGame extends BasicGame
 		playerObject.angle.x = (float) Math.cos(Math.toRadians(direction-90));
 	    playerObject.angle.y = (float) Math.sin(Math.toRadians(direction-90));
 	    
+	    asteroid.move();
+	    System.out.println(asteroid.rotation);
+	    
 	    
 	}
 
@@ -50,8 +55,10 @@ public class SimpleSlickGame extends BasicGame
 	{
 		g.drawString("Hello World!", 250, 200);
 		g.drawString("This is bad", 200,100);
+
+		asteroid.render();
 		
-		playerSprite.rotate(playerObject.rotation); //Rotate the player
+		playerSprite.rotate(playerObject.rotation);
 		playerSprite.draw(playerObject.position.x,playerObject.position.y,playerObject.scale); //Draw the player
 	}
 
