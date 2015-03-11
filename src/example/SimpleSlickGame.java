@@ -9,21 +9,15 @@ import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
 public class SimpleSlickGame extends BasicGame
 {
 	
-	private Image player = null;
-	private int speed = 5;
-	
-	public Vector2f angle, position;
-	public float direction = 0;
-	
-	private float scale = 0.3f;
-	private float rotation = 0;
-	Input input;
+	public Image playerSprite;
+	public float direction;
+	Player playerObject = new Player();
+	public Asteroids asteroid;
 
 	
 	public SimpleSlickGame(String gamename)
@@ -34,39 +28,28 @@ public class SimpleSlickGame extends BasicGame
 	@Override
 	public void init(GameContainer gc) throws SlickException {
 		
-		position = new Vector2f();
-		angle = new Vector2f();
+		playerObject.position = new Vector2f();
+		playerObject.angle = new Vector2f();
+		playerObject.input = gc.getInput(); //Init input class
+		playerSprite = new Image("graphics/playerWhite.png");
+		playerSprite.setCenterOfRotation(playerSprite.getWidth() * playerObject.scale / 2, playerSprite.getHeight() * playerObject.scale / 2); //Set the origin of the player sprite
 		
-		input = gc.getInput(); //Init input class
-		
-		player = new Image("graphics/playerWhite.png");
-
-		player.setCenterOfRotation(player.getWidth() * scale / 2, player.getHeight() * scale / 2); //Set the origin of the player sprite
-
+		 asteroid = new Asteroids(5f,5f);
 	}
 
 	@Override
 	public void update(GameContainer gc, int i) throws SlickException {
+		playerObject.playerMovement();
 		
-		direction = player.getRotation();
+		direction = playerSprite.getRotation();
 		
-		angle.x = (float) Math.cos(Math.toRadians(direction-90));
-	    angle.y = (float) Math.sin(Math.toRadians(direction-90));
-		
-		if(input.isKeyDown(Input.KEY_UP)) {
-			 position.x += angle.x * speed;
-	         position.y += angle.y * speed;
-			
-		}
-		
-		//Set player rotation
-		if(input.isKeyDown(Input.KEY_D)){
-			rotation = 5;
-		}
-		else if (input.isKeyDown(Input.KEY_A)){
-			rotation = -5;
-		}
-		else rotation = 0;
+		playerObject.angle.x = (float) Math.cos(Math.toRadians(direction-90));
+	    playerObject.angle.y = (float) Math.sin(Math.toRadians(direction-90));
+	    
+	    asteroid.move();
+	    System.out.println(asteroid.rotation);
+	    
+	    
 	}
 
 	@Override
@@ -74,11 +57,11 @@ public class SimpleSlickGame extends BasicGame
 	{
 		g.drawString("Hello World!", 250, 200);
 		g.drawString("This is bad", 200,100);
+
+		asteroid.render();
 		
-		player.rotate(rotation); //Rotate the player
-		player.draw(position.x,position.y,scale); //Draw the player
-		
-		//tileset.getSubImage(0, 0, 197, 165).draw(50,50,0.2f);
+		playerSprite.rotate(playerObject.rotation);
+		playerSprite.draw(playerObject.position.x,playerObject.position.y,playerObject.scale); //Draw the player
 	}
 
 	public static void main(String[] args)
