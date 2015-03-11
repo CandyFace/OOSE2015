@@ -19,6 +19,8 @@ public class SimpleSlickGame extends BasicGame
 	private Image player = null;
 	private Color white = new Color(255,255,255);
 	private int speed = 10;
+	float playerY = 400;
+	float playerX = 0;
 	
 	
 	private float scale = 0.3f;
@@ -47,7 +49,9 @@ public class SimpleSlickGame extends BasicGame
 		
 		//Set player rotation
 		
+		
 		if(input.isKeyDown(Input.KEY_UP)) {
+			playerY += speed;
 			
 		}
 		
@@ -67,7 +71,7 @@ public class SimpleSlickGame extends BasicGame
 		g.drawString("This is bad", 200,100);
 		
 		player.rotate(rotation); //Rotate the player
-		player.draw(50f,50f,scale); //Draw the player
+		player.draw(50f,playerY,scale); //Draw the player
 	}
 
 	public static void main(String[] args)
