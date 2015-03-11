@@ -2,30 +2,21 @@ package example;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.vecmath.Vector2f;
+
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-
-//Det virker! Nu vi klar!
 
 public class SimpleSlickGame extends BasicGame
 {
 	
-	private Image player = null;
-	private Color white = new Color(255,255,255);
-	private int speed = 10;
-	float playerY = 400;
-	float playerX = 0;
-	
-	
-	private float scale = 0.3f;
-	private float rotation = 0;
-	Input input;
+	public Image playerSprite;
+	public float direction;
+	Player playerObject = new Player();
 
 	
 	public SimpleSlickGame(String gamename)
@@ -36,32 +27,24 @@ public class SimpleSlickGame extends BasicGame
 	@Override
 	public void init(GameContainer gc) throws SlickException {
 		
-		input = gc.getInput(); //Init input class
+		playerObject.position = new Vector2f();
+		playerObject.angle = new Vector2f();
+		playerObject.input = gc.getInput(); //Init input class
+		playerSprite = new Image("graphics/playerWhite.png");
+		playerSprite.setCenterOfRotation(playerSprite.getWidth() * playerObject.scale / 2, playerSprite.getHeight() * playerObject.scale / 2); //Set the origin of the player sprite
 		
-		player = new Image("graphics/playerWhite.png");
-
-		player.setCenterOfRotation(player.getWidth() * scale / 2, player.getHeight() * scale / 2); //Set the origin of the player sprite
-
 	}
 
 	@Override
 	public void update(GameContainer gc, int i) throws SlickException {
+		playerObject.playerMovement();
 		
-		//Set player rotation
+		direction = playerSprite.getRotation();
 		
-		
-		if(input.isKeyDown(Input.KEY_UP)) {
-			playerY += speed;
-			
-		}
-		
-		if(input.isKeyDown(Input.KEY_D)){
-			rotation = 5;
-		}
-		else if (input.isKeyDown(Input.KEY_A)){
-			rotation = -5;
-		}
-		else rotation = 0;
+		playerObject.angle.x = (float) Math.cos(Math.toRadians(direction-90));
+	    playerObject.angle.y = (float) Math.sin(Math.toRadians(direction-90));
+	    
+	    
 	}
 
 	@Override
@@ -70,8 +53,8 @@ public class SimpleSlickGame extends BasicGame
 		g.drawString("Hello World!", 250, 200);
 		g.drawString("This is bad", 200,100);
 		
-		player.rotate(rotation); //Rotate the player
-		player.draw(50f,playerY,scale); //Draw the player
+		playerSprite.rotate(playerObject.rotation); //Rotate the player
+		playerSprite.draw(playerObject.position.x,playerObject.position.y,playerObject.scale); //Draw the player
 	}
 
 	public static void main(String[] args)
