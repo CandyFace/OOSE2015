@@ -2,24 +2,24 @@ package example;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.vecmath.Vector2f;
+
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
-//Det virker! Nu vi klar!
-
 public class SimpleSlickGame extends BasicGame
 {
 	
 	private Image player = null;
-	private Color white = new Color(255,255,255);
-	private int speed = 10;
+	private int speed = 5;
 	
+	public Vector2f angle, position;
+	public float direction = 0;
 	
 	private float scale = 0.3f;
 	private float rotation = 0;
@@ -34,6 +34,9 @@ public class SimpleSlickGame extends BasicGame
 	@Override
 	public void init(GameContainer gc) throws SlickException {
 		
+		position = new Vector2f();
+		angle = new Vector2f();
+		
 		input = gc.getInput(); //Init input class
 		
 		player = new Image("graphics/playerWhite.png");
@@ -45,12 +48,18 @@ public class SimpleSlickGame extends BasicGame
 	@Override
 	public void update(GameContainer gc, int i) throws SlickException {
 		
-		//Set player rotation
+		direction = player.getRotation();
+		
+		angle.x = (float) Math.cos(Math.toRadians(direction-90));
+	    angle.y = (float) Math.sin(Math.toRadians(direction-90));
 		
 		if(input.isKeyDown(Input.KEY_UP)) {
+			 position.x += angle.x * speed;
+	         position.y += angle.y * speed;
 			
 		}
 		
+		//Set player rotation
 		if(input.isKeyDown(Input.KEY_D)){
 			rotation = 5;
 		}
@@ -67,7 +76,7 @@ public class SimpleSlickGame extends BasicGame
 		g.drawString("This is bad", 200,100);
 		
 		player.rotate(rotation); //Rotate the player
-		player.draw(50f,50f,scale); //Draw the player
+		player.draw(position.x,position.y,scale); //Draw the player
 	}
 
 	public static void main(String[] args)
