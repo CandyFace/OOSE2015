@@ -7,9 +7,6 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
-//TEST
-//Hej
-
 public class SimpleSlickGame extends BasicGame
 {
 	public SimpleSlickGame(String gamename)
@@ -43,5 +40,4 @@ public class SimpleSlickGame extends BasicGame
 			Logger.getLogger(SimpleSlickGame.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
-	// WHAAAT Up
 }
