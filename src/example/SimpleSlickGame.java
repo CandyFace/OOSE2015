@@ -45,7 +45,6 @@ public class SimpleSlickGame extends BasicGame
 	    playerObject.angle.y = (float) Math.sin(Math.toRadians(direction-90));
 	    
 	    asteroid.move();
-	    System.out.println(asteroid.rotation);
 	    
 	    
 	}

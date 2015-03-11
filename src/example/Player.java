@@ -18,19 +18,19 @@ public class Player {
 	
 	public void playerMovement() {
 	
-	if(input.isKeyDown(Input.KEY_UP)) {
-		 position.x += angle.x * speed;
-         position.y += angle.y * speed;
+	if(input.isKeyDown(Input.KEY_UP)){
+		 this.position.x += angle.x * speed;
+         this.position.y += angle.y * speed;
 	}
-	
-	//Set player rotation
 	if(input.isKeyDown(Input.KEY_D)){
-		rotation = 5;
+		//Set player rotation
+		this.rotation = 5;
 	}
 	else if (input.isKeyDown(Input.KEY_A)){
-		rotation = -5;
-	}
-	else rotation = 0;
+		this.rotation = -5;
+	}	
+		else this.rotation = 0;
+	
 	}
 
 }
