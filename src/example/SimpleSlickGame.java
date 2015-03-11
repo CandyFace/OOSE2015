@@ -77,6 +77,8 @@ public class SimpleSlickGame extends BasicGame
 		
 		player.rotate(rotation); //Rotate the player
 		player.draw(position.x,position.y,scale); //Draw the player
+		
+		//tileset.getSubImage(0, 0, 197, 165).draw(50,50,0.2f);
 	}
 
 	public static void main(String[] args)
