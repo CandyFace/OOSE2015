@@ -24,8 +24,8 @@ public class Asteroids {
         this.position.y = 50;
 		scale = 0.3f;
 		
-		this.speed = maxSpeed * time.deltaTime();
-		this.rotation = maxRotation * time.deltaTime();
+		this.speed = maxSpeed;
+		this.rotation = maxRotation;
 		
 		tileset = new Image("graphics/Asteroids.png");
 		asteroidSprite = tileset.getSubImage(0, 0, 197, 165);
@@ -33,10 +33,16 @@ public class Asteroids {
 		
 	}
 	
+	public void update(float delta)
+	{
+		move();
+		
+	}
+	
 	public void move(){
 		
-		this.position.x += speed * time.deltaTime();
-        this.position.y += speed * time.deltaTime();
+		this.position.x += speed;
+        this.position.y += speed;
  
 	}
 	

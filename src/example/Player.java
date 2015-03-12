@@ -8,10 +8,10 @@ import org.newdawn.slick.SlickException;
 
 public class Player {
 	
-	public int speed = 15;
+	public int speed = 4;
 	float playerY = 400;
 	float playerX = 0;
-	float rotationSpeed = 50;
+	float rotationSpeed = 10;
 	public Vector2f angle, position;
 	public float direction = 0;
 	
@@ -36,21 +36,21 @@ public class Player {
 		
 	
 	if(input.isKeyDown(Input.KEY_UP)){
-		 this.position.x += angle.x * speed * time.deltaTime();
-         this.position.y += angle.y * speed * time.deltaTime();
+		 this.position.x += angle.x * speed;
+         this.position.y += angle.y * speed;
 	}
 	if(input.isKeyDown(Input.KEY_D)){
 		//Set player rotation
-		this.rotation = rotationSpeed * time.deltaTime();
+		this.rotation = rotationSpeed;
 	}
 	else if (input.isKeyDown(Input.KEY_A)){
-		this.rotation = -rotationSpeed * time.deltaTime();
+		this.rotation = -rotationSpeed;
 	}	
 		else this.rotation = 0;
 	
 	}
 	
-	public void update(){
+	public void update(float delta){
 		playerMovement();
 		
 		direction = playerSprite.getRotation();
