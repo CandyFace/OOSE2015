@@ -1,20 +1,18 @@
-# Slick2D Eclipse Seed Project
-This an eclipse project containing all the files necessary to begin developing games with [Slick 2D](http://slick.ninjacave.com/). You can fork this repository, clone it on your disk and start to work in Eclipse.
+# Slick2D Eclipse OOSE2015 Project - Asteroids
 
-After having cloned the repository to your disk you have to follow these few steps:
+A recreaton of the old arcade Asteroids game with hopefully additional features.
+This project is a part of OOSE2015 AAU Medialogy Cph.
 
-1. Open up Eclipse.
-2. Create a new java project and select the folder containing this seed.
-2. Go to Project --> Properties in the menu bar.
-3. Click on Java Build Path.
-4. click the Add Jar button.
-5. Select the *lib* folder in your project.
-6. Select all the *.jar* files and click OK.
-7. Expand *lwjgl.jar*.
-8. Select *Natives Library Location* and click the Edit button.
-9. Click the Workspace button.
-10. Select the *native* folder in your project
-11. Select your operating system and click OK until you get back to the default eclipse window.
-12. Press play to check it it works.
-13. Now, you can start making your own game.
-14. Pass the exam
+The game features so far:
+- Player movement with rotation
+- An asteroid which can fly and rotate
+
+The hopefully game will feature:
+- A working variant of the Asteroid game
+- Score and lives
+- Particles, because particles makes everything better..
+- Sound effects and titlescreen
+
+
+Interesting additions but most likely not happening:
+- Network gameplay
