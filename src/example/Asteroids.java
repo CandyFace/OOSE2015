@@ -16,6 +16,10 @@ public class Asteroids {
 	
 	DeltaTime time = new DeltaTime();
 	
+	/**
+	 * @param float maxSpeed
+	 * @param float maxRotation
+	 */
 	public Asteroids(float maxSpeed, float maxRotation) throws SlickException{
 		
 		position = new Vector2f();
@@ -33,12 +37,20 @@ public class Asteroids {
 		
 	}
 	
-	public void update(float delta)
+	/**
+	 *@return void
+	 * Used for variables which needs to be updated all the time.
+	 */
+	public void update()
 	{
 		move();
 		
 	}
 	
+	/**
+	 *@return void
+	 * 
+	 */
 	public void move(){
 		
 		this.position.x += speed;
@@ -46,8 +58,11 @@ public class Asteroids {
  
 	}
 	
+	/**
+	 *@return void
+	 * Used for variables which are to be used for rendering
+	 */
 	public void render(){
-		
 		
 		asteroidSprite.draw(position.x,position.y,scale);
 		asteroidSprite.rotate(rotation);

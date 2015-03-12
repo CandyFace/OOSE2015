@@ -23,6 +23,12 @@ public class Player {
 	
 	Image playerSprite;
 	
+	/**
+	 * 
+	 * @throws SlickException
+	 * @return void
+	 * Used to initialize all variables for usage in player class
+	 */
 	public void init() throws SlickException
 	{
 		position = new Vector2f();
@@ -32,9 +38,12 @@ public class Player {
 		
 	}
 	
+	/**
+	 * @return void
+	 * Controls key inputs for playerMovement
+	 */
 	public void playerMovement() {
 		
-	
 	if(input.isKeyDown(Input.KEY_UP)){
 		 this.position.x += angle.x * speed;
          this.position.y += angle.y * speed;
@@ -50,7 +59,11 @@ public class Player {
 	
 	}
 	
-	public void update(float delta){
+	/**
+	 * @return void
+	 * used for updating everything in Player class
+	 */
+	public void update(){
 		playerMovement();
 		
 		direction = playerSprite.getRotation();
@@ -60,6 +73,10 @@ public class Player {
 	    
 	}
 	
+	/**
+	 * @return void
+	 * Used for rendering all resources in Player class
+	 */
 	public void render()
 	{
 		playerSprite.rotate(rotation);

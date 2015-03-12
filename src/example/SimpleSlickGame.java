@@ -14,6 +14,7 @@ public class SimpleSlickGame extends BasicGame
 	
 	Player playerObject = new Player();
 	public Asteroids asteroid;
+	float time = 0;
 	
 	public SimpleSlickGame(String gamename)
 	{
@@ -30,14 +31,18 @@ public class SimpleSlickGame extends BasicGame
 
 	@Override
 	public void update(GameContainer gc, int delta) throws SlickException {
-		playerObject.update(delta); // Call update method from Player class
-	    asteroid.move();
+		//time += delta;
+		
+		//System.out.println(time);
+		playerObject.update(); // Call update method from Player class
+	    asteroid.update();
 	       
 	}
 
 	@Override
 	public void render(GameContainer gc, Graphics g) throws SlickException
 	{
+		
 		g.drawString("Hello World!", 250, 200);
 		g.drawString("This is bad", 200,100);
 
@@ -53,7 +58,7 @@ public class SimpleSlickGame extends BasicGame
 			AppGameContainer appgc;
 			appgc = new AppGameContainer(new SimpleSlickGame("Simple Slick Game"));
 			appgc.setDisplayMode(640, 480, false);
-			//appgc.setTargetFrameRate(60);
+			appgc.setTargetFrameRate(60);
 			appgc.start();
 		}
 		catch (SlickException ex)

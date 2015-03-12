@@ -5,6 +5,7 @@ public class DeltaTime {
 	/**
 	 * @param deltaTime
 	 * @return
+	 * Unused atm..
 	 */
 	public float deltaTime()
 	{
