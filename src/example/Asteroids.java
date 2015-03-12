@@ -10,9 +10,11 @@ public class Asteroids {
 	public float speed, rotation;
 	private Vector2f position;
 	public float posX,posY,scale;
-	public Image test;
+	public Image asteroidSprite;
 	
 	public Image tileset;
+	
+	DeltaTime time = new DeltaTime();
 	
 	public Asteroids(float maxSpeed, float maxRotation) throws SlickException{
 		
@@ -22,28 +24,27 @@ public class Asteroids {
         this.position.y = 50;
 		scale = 0.3f;
 		
-		this.speed = maxSpeed;
-		this.rotation = maxRotation;
+		this.speed = maxSpeed * time.deltaTime();
+		this.rotation = maxRotation * time.deltaTime();
 		
 		tileset = new Image("graphics/Asteroids.png");
-		test = tileset.getSubImage(0, 0, 197, 165);
-		test.setCenterOfRotation(test.getWidth() * scale / 2, test.getHeight() * scale / 2); 
+		asteroidSprite = tileset.getSubImage(0, 0, 197, 165);
+		asteroidSprite.setCenterOfRotation(asteroidSprite.getWidth() * scale / 2, asteroidSprite.getHeight() * scale / 2); 
 		
 	}
 	
 	public void move(){
 		
-		position.x += speed;
-        position.y += speed;
+		this.position.x += speed * time.deltaTime();
+        this.position.y += speed * time.deltaTime();
  
-        
 	}
 	
 	public void render(){
 		
 		
-		test.draw(position.x,position.y,scale);
-		test.rotate(rotation);
+		asteroidSprite.draw(position.x,position.y,scale);
+		asteroidSprite.rotate(rotation);
 	}
 
 }
