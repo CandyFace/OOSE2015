@@ -8,18 +8,21 @@ import org.newdawn.slick.SlickException;
 
 public class Player {
 	
-	public int speed = 4;
+	public double speed = 0;
+	int maxSpeed = 10;
+	float accel = 1f;
 	float playerY = 400;
+	float delta = 0.033f;
 	float playerX = 0;
 	float rotationSpeed = 10;
-	public Vector2f angle, position;
+	public Vector2f angle, currentAngle, position;
 	public float direction = 0;
 	
 	public float scale = 0.05f;
 	public float rotation = 0;
 	
 	public Input input;
-	DeltaTime time = new DeltaTime();
+	//DeltaTime time = new DeltaTime();
 	
 	Image playerSprite;
 	
@@ -33,6 +36,7 @@ public class Player {
 	{
 		position = new Vector2f();
 		angle = new Vector2f();
+		currentAngle = new Vector2f();
 		playerSprite = new Image("graphics/playerWhite.png");
 		playerSprite.setCenterOfRotation(playerSprite.getWidth() * scale / 2, playerSprite.getHeight() * scale / 2); //Set the origin of the player sprite
 		
@@ -45,9 +49,34 @@ public class Player {
 	public void playerMovement() {
 		
 	if(input.isKeyDown(Input.KEY_UP)){
+		
+		direction = playerSprite.getRotation();
+		angle.x = (float) Math.cos(Math.toRadians(direction-90));
+	    angle.y = (float) Math.sin(Math.toRadians(direction-90));
+
+		speed+= accel * delta;
+		if(speed >= maxSpeed){
+			speed = maxSpeed;
+		}
+			
+		System.out.println(speed);
+		//System.out.println(speed);
 		 this.position.x += angle.x * speed;
          this.position.y += angle.y * speed;
+		
 	}
+         else if(input.isKeyDown(Input.KEY_UP) == false){	
+			speed -= accel *delta;
+
+			if(speed <= 0){
+				speed = 0;
+			}
+						
+			//System.out.println(speed);
+			this.position.x += angle.x * speed;
+	        this.position.y += angle.y * speed; 
+	}
+         
 	if(input.isKeyDown(Input.KEY_D)){
 		//Set player rotation
 		this.rotation = rotationSpeed;
@@ -65,11 +94,6 @@ public class Player {
 	 */
 	public void update(){
 		playerMovement();
-		
-		direction = playerSprite.getRotation();
-		
-		angle.x = (float) Math.cos(Math.toRadians(direction-90));
-	    angle.y = (float) Math.sin(Math.toRadians(direction-90));
 	    
 	}
 	
