@@ -14,9 +14,10 @@ public class Player {
 	float playerY = 400;
 	float delta = 0.033f;
 	float playerX = 0;
-	float rotationSpeed = 10;
+	float rotationSpeed = 5;
 	public Vector2f angle, currentAngle, position;
 	public float direction = 0;
+	private float friction = 0.98f;
 	
 	public float scale = 0.05f;
 	public float rotation = 0;
@@ -39,7 +40,6 @@ public class Player {
 		currentAngle = new Vector2f();
 		playerSprite = new Image("graphics/playerWhite.png");
 		playerSprite.setCenterOfRotation(playerSprite.getWidth() * scale / 2, playerSprite.getHeight() * scale / 2); //Set the origin of the player sprite
-		
 	}
 	
 	/**
@@ -51,8 +51,8 @@ public class Player {
 	if(input.isKeyDown(Input.KEY_UP)){
 		
 		direction = playerSprite.getRotation();
-		angle.x = (float) Math.cos(Math.toRadians(direction-90));
-	    angle.y = (float) Math.sin(Math.toRadians(direction-90));
+		angle.x += (float) Math.cos(Math.toRadians(direction-90))* speed * delta;
+	    angle.y += (float) Math.sin(Math.toRadians(direction-90))* speed * delta;
 
 		speed+= accel * delta;
 		if(speed >= maxSpeed){
@@ -61,20 +61,27 @@ public class Player {
 			
 		System.out.println(speed);
 		//System.out.println(speed);
-		 this.position.x += angle.x * speed;
-         this.position.y += angle.y * speed;
+		
+		position.x += angle.x;
+		position.y += angle.y;
+		
+		angle.x *= friction;
+        angle.y *= friction;
 		
 	}
          else if(input.isKeyDown(Input.KEY_UP) == false){	
-			speed -= accel *delta;
-
+        	speed-= accel * delta;
 			if(speed <= 0){
 				speed = 0;
 			}
+			System.out.println(speed);
 						
 			//System.out.println(speed);
-			this.position.x += angle.x * speed;
-	        this.position.y += angle.y * speed; 
+			position.x += angle.x;
+			position.y += angle.y;
+			
+			angle.x *= friction;
+	        angle.y *= friction; 
 	}
          
 	if(input.isKeyDown(Input.KEY_D)){
@@ -103,6 +110,7 @@ public class Player {
 	 */
 	public void render()
 	{
+		
 		playerSprite.rotate(rotation);
 		playerSprite.draw(position.x,position.y,scale);
 	}
