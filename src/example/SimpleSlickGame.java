@@ -27,7 +27,7 @@ public class SimpleSlickGame extends BasicGame
 	@Override
 	public void init(GameContainer gc) throws SlickException {
 		
-		asteroid = new Asteroids(2f, 10f);
+		asteroid = new Asteroids(2f, 5f);
 		playerObject.init(); //Call init method from Player class
 		playerObject.input = gc.getInput(); //Init input class
 		
