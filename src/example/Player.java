@@ -11,9 +11,7 @@ public class Player {
 	public double speed = 0;
 	int maxSpeed = 10;
 	float accel = 1f;
-	float playerY = 400;
 	float delta = 0.033f;
-	float playerX = 0;
 	float rotationSpeed = 5;
 	public Vector2f angle, currentAngle, position;
 	public float direction = 0;
@@ -58,9 +56,6 @@ public class Player {
 		if(speed >= maxSpeed){
 			speed = maxSpeed;
 		}
-			
-		System.out.println(speed);
-		//System.out.println(speed);
 		
 		position.x += angle.x;
 		position.y += angle.y;
@@ -74,14 +69,13 @@ public class Player {
 			if(speed <= 0){
 				speed = 0;
 			}
-			System.out.println(speed);
-						
-			//System.out.println(speed);
+
 			position.x += angle.x;
 			position.y += angle.y;
 			
 			angle.x *= friction;
-	        angle.y *= friction; 
+	        angle.y *= friction;
+	        
 	}
          
 	if(input.isKeyDown(Input.KEY_D)){
@@ -93,6 +87,12 @@ public class Player {
 	}	
 		else this.rotation = 0;
 	
+	//Wrap player
+	if(position.y < 0-(playerSprite.getHeight()*scale)) position.y = SimpleSlickGame.HEIGHT;
+	if(position.y > SimpleSlickGame.HEIGHT) position.y = 0-(playerSprite.getHeight()*scale);
+	if(position.x < 0-(playerSprite.getWidth()*scale)) position.x = SimpleSlickGame.WIDTH;
+	if(position.x > SimpleSlickGame.WIDTH) position.x = 0-(playerSprite.getWidth()*scale);
+	
 	}
 	
 	/**
@@ -100,8 +100,7 @@ public class Player {
 	 * used for updating everything in Player class
 	 */
 	public void update(){
-		playerMovement();
-	    
+		playerMovement();   
 	}
 	
 	/**
@@ -109,8 +108,7 @@ public class Player {
 	 * Used for rendering all resources in Player class
 	 */
 	public void render()
-	{
-		
+	{	
 		playerSprite.rotate(rotation);
 		playerSprite.draw(position.x,position.y,scale);
 	}
