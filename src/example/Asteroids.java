@@ -10,25 +10,20 @@ import org.newdawn.slick.SlickException;
 public class Asteroids {
 	
 	public float speed, rotation;
-	private Vector2f position, angle;
-	public float posX,posY,scale;
+	public Image tileset;
 	public Image asteroidSprite;
 	
-	Random rand = new Random();
-	
-	int rndDir = rand.nextInt(360);
-	
-	public Image tileset;
-	
-	DeltaTime time = new DeltaTime();
+	private Vector2f position, angle;
+	private float scale;
+	private Random rand = new Random();
+	private int rndDir = rand.nextInt(360);
+
 	
 	/**
 	 * @param float maxSpeed
 	 * @param float maxRotation
 	 */
 	public Asteroids(float maxSpeed, float maxRotation) throws SlickException{
-		
-		
 		int rndX = rand.nextInt(SimpleSlickGame.WIDTH) + 1;
 		int rndY = rand.nextInt(SimpleSlickGame.HEIGHT) + 1;
 		
@@ -64,7 +59,7 @@ public class Asteroids {
 	 *@return void
 	 * 
 	 */
-	public void move(){
+	private void move(){
 		
 		angle.x = (float) Math.cos(Math.toRadians(rndDir))* speed;
 	    angle.y = (float) Math.sin(Math.toRadians(rndDir)) * speed;
