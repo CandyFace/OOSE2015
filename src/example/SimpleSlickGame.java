@@ -14,9 +14,7 @@ public class SimpleSlickGame extends BasicGame
 	
 	Player playerObject = new Player();
 	public Asteroids asteroid;
-	float time = 0;
 
-	
 	static int WIDTH = 640;
 	static int HEIGHT = 480;
 	

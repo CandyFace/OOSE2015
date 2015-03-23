@@ -22,9 +22,9 @@ public class Player {
 	private Image playerSprite;
 	
 	public Input input;
-	
+
 	/**
-	 * 
+	 *
 	 * @throws SlickException
 	 * @return void
 	 * Used to initialize all variables for usage in player class
@@ -83,7 +83,7 @@ public class Player {
         System.out.println("Acceleration: " +Math.sqrt(Math.pow(angle.x,2) + Math.pow(angle.y,2)) * 10);
 		
 	}
-         else if(input.isKeyDown(Input.KEY_UP) == false){	
+         else if(!input.isKeyDown(Input.KEY_UP)){
         	speed-= accel * delta;
 			
         	if(speed <= 0){
