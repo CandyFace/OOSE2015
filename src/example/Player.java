@@ -8,6 +8,7 @@ import org.newdawn.slick.SlickException;
 
 public class Player {
 	
+
 	private double speed = 0;
 	private int maxSpeed = 10;
 	private float accel = 0.5f;
