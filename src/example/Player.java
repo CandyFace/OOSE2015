@@ -8,23 +8,20 @@ import org.newdawn.slick.SlickException;
 
 public class Player {
 	
-	public double speed = 0;
 
-	int maxSpeed = 10;
-	float accel = 1f;
-	float delta = 0.033f;
-	float rotationSpeed = 3;
-	public Vector2f angle, currentAngle, position;
-	public float direction = 0;
+	private double speed = 0;
+	private int maxSpeed = 10;
+	private float accel = 0.5f;
+	private float delta = 0.033f;
+	private float rotationSpeed = 3;
+	private Vector2f angle, position;
+	private float direction = 0;
 	private float friction = 0.98f;
-	
-	public float scale = 0.05f;
-	public float rotation = 0;
+	private float scale = 0.05f;
+	private float rotation = 0;
+	private Image playerSprite;
 	
 	public Input input;
-	//DeltaTime time = new DeltaTime();
-	
-	Image playerSprite;
 	
 	/**
 	 * 
@@ -36,16 +33,34 @@ public class Player {
 	{
 		position = new Vector2f();
 		angle = new Vector2f();
-		currentAngle = new Vector2f();
 		playerSprite = new Image("graphics/playerWhite.png");
 		playerSprite.setCenterOfRotation(playerSprite.getWidth() * scale / 2, playerSprite.getHeight() * scale / 2); //Set the origin of the player sprite
+	}
+	
+	
+	/**
+	 * @return void
+	 * used for updating everything in Player class
+	 */
+	public void update(){
+		playerMovement();   
+	}
+	
+	/**
+	 * @return void
+	 * Used for rendering all resources in Player class
+	 */
+	public void render()
+	{
+		playerSprite.rotate(rotation);
+		playerSprite.draw(position.x,position.y,scale);
 	}
 	
 	/**
 	 * @return void
 	 * Controls key inputs for playerMovement
 	 */
-	public void playerMovement() {
+	private void playerMovement() {
 		
 	if(input.isKeyDown(Input.KEY_UP)){
 		
@@ -102,25 +117,7 @@ public class Player {
 	
 	}
 	
-	/**
-	 * @return void
-	 * used for updating everything in Player class
-	 */
-	public void update(){
-		playerMovement();   
-	}
-	
-	/**
-	 * @return void
-	 * Used for rendering all resources in Player class
-	 */
-	public void render()
-	{
-		playerSprite.rotate(rotation);
-		playerSprite.draw(position.x,position.y,scale);
-	}
-	
-	double calAcceleration(double a, double b)
+	private double calAcceleration(double a, double b)
 	{
 		return Math.sqrt(Math.pow(a,2) + Math.pow(b,2));
 	}
