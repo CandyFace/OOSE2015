@@ -10,11 +10,9 @@ public class Player {
 	
 	public double speed = 0;
 	int maxSpeed = 10;
-	float accel = 1f;
-	float playerY = 400;
+	float accel = 0.5f;
 	float delta = 0.033f;
-	float playerX = 0;
-	float rotationSpeed = 5;
+	float rotationSpeed = 3;
 	public Vector2f angle, currentAngle, position;
 	public float direction = 0;
 	private float friction = 0.98f;
@@ -58,30 +56,32 @@ public class Player {
 		if(speed >= maxSpeed){
 			speed = maxSpeed;
 		}
-			
-		System.out.println(speed);
-		//System.out.println(speed);
-		
+
 		position.x += angle.x;
 		position.y += angle.y;
 		
 		angle.x *= friction;
         angle.y *= friction;
+        
+        //Speed of ship
+        System.out.println("Acceleration: " +Math.sqrt(Math.pow(angle.x,2) + Math.pow(angle.y,2)) * 10);
 		
 	}
          else if(input.isKeyDown(Input.KEY_UP) == false){	
         	speed-= accel * delta;
-			if(speed <= 0){
+			
+        	if(speed <= 0){
 				speed = 0;
 			}
-			System.out.println(speed);
 						
-			//System.out.println(speed);
 			position.x += angle.x;
 			position.y += angle.y;
 			
 			angle.x *= friction;
 	        angle.y *= friction; 
+	        
+	        //Speed of ship
+	        System.out.println("Acceleration: " +calAcceleration(angle.x,angle.y)* 10);
 	}
          
 	if(input.isKeyDown(Input.KEY_D)){
@@ -110,9 +110,13 @@ public class Player {
 	 */
 	public void render()
 	{
-		
 		playerSprite.rotate(rotation);
 		playerSprite.draw(position.x,position.y,scale);
+	}
+	
+	double calAcceleration(double a, double b)
+	{
+		return Math.sqrt(Math.pow(a,2) + Math.pow(b,2));
 	}
 
 

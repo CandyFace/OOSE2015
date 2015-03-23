@@ -1,5 +1,6 @@
 package example;
 
+
 import javax.vecmath.Vector2f;
 
 import org.newdawn.slick.Image;
@@ -11,6 +12,7 @@ public class Asteroids {
 	private Vector2f position;
 	public float posX,posY,scale;
 	public Image asteroidSprite;
+	
 	
 	public Image tileset;
 	
