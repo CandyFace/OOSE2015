@@ -9,7 +9,7 @@ import org.newdawn.slick.SlickException;
 public class Player {
 	
 	public double speed = 0;
-	int maxSpeed = 10;
+
 	float accel = 1f;
 	float delta = 0.033f;
 	float rotationSpeed = 5;
@@ -47,6 +47,8 @@ public class Player {
 	public void playerMovement() {
 		
 	if(input.isKeyDown(Input.KEY_UP)){
+		int maxSpeed = 10;
+		
 		
 		direction = playerSprite.getRotation();
 		angle.x += (float) Math.cos(Math.toRadians(direction-90))* speed * delta;
