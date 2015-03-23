@@ -17,6 +17,9 @@ public class SimpleSlickGame extends BasicGame
 	float time = 0;
 
 	
+	static int WIDTH = 640;
+	static int HEIGHT = 480;
+	
 	public SimpleSlickGame(String gamename)
 	{
 		super(gamename);
@@ -25,9 +28,10 @@ public class SimpleSlickGame extends BasicGame
 	@Override
 	public void init(GameContainer gc) throws SlickException {
 		
-		asteroid = new Asteroids(2f, 10f);
+		asteroid = new Asteroids(2f, 5f);
 		playerObject.init(); //Call init method from Player class
 		playerObject.input = gc.getInput(); //Init input class
+		
 	}
 
 	@Override
@@ -58,7 +62,7 @@ public class SimpleSlickGame extends BasicGame
 		{
 			AppGameContainer appgc;
 			appgc = new AppGameContainer(new SimpleSlickGame("Simple Slick Game"));
-			appgc.setDisplayMode(640, 480, false);
+			appgc.setDisplayMode(WIDTH, HEIGHT, false);
 			appgc.setTargetFrameRate(60);
 			appgc.start();
 		}

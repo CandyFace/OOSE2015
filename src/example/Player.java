@@ -73,7 +73,7 @@ public class Player {
         	if(speed <= 0){
 				speed = 0;
 			}
-						
+
 			position.x += angle.x;
 			position.y += angle.y;
 			
@@ -93,6 +93,12 @@ public class Player {
 	}	
 		else this.rotation = 0;
 	
+	//Wrap player
+	if(position.y < 0-(playerSprite.getHeight()*scale)) position.y = SimpleSlickGame.HEIGHT;
+	if(position.y > SimpleSlickGame.HEIGHT) position.y = 0-(playerSprite.getHeight()*scale);
+	if(position.x < 0-(playerSprite.getWidth()*scale)) position.x = SimpleSlickGame.WIDTH;
+	if(position.x > SimpleSlickGame.WIDTH) position.x = 0-(playerSprite.getWidth()*scale);
+	
 	}
 	
 	/**
@@ -100,8 +106,7 @@ public class Player {
 	 * used for updating everything in Player class
 	 */
 	public void update(){
-		playerMovement();
-	    
+		playerMovement();   
 	}
 	
 	/**
