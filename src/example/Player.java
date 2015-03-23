@@ -1,6 +1,6 @@
 package example;
 
-import javax.vecmath.Vector2f;
+import org.newdawn.slick.geom.Vector2f;
 
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
@@ -10,9 +10,10 @@ public class Player {
 	
 	public double speed = 0;
 
+	int maxSpeed = 10;
 	float accel = 1f;
 	float delta = 0.033f;
-	float rotationSpeed = 5;
+	float rotationSpeed = 3;
 	public Vector2f angle, currentAngle, position;
 	public float direction = 0;
 	private float friction = 0.98f;
@@ -47,8 +48,6 @@ public class Player {
 	public void playerMovement() {
 		
 	if(input.isKeyDown(Input.KEY_UP)){
-		int maxSpeed = 10;
-		
 		
 		direction = playerSprite.getRotation();
 		angle.x += (float) Math.cos(Math.toRadians(direction-90))* speed * delta;
@@ -58,17 +57,21 @@ public class Player {
 		if(speed >= maxSpeed){
 			speed = maxSpeed;
 		}
-		
+
 		position.x += angle.x;
 		position.y += angle.y;
 		
 		angle.x *= friction;
         angle.y *= friction;
+        
+        //Speed of ship
+        System.out.println("Acceleration: " +Math.sqrt(Math.pow(angle.x,2) + Math.pow(angle.y,2)) * 10);
 		
 	}
          else if(input.isKeyDown(Input.KEY_UP) == false){	
         	speed-= accel * delta;
-			if(speed <= 0){
+			
+        	if(speed <= 0){
 				speed = 0;
 			}
 
@@ -76,8 +79,10 @@ public class Player {
 			position.y += angle.y;
 			
 			angle.x *= friction;
-	        angle.y *= friction;
+	        angle.y *= friction; 
 	        
+	        //Speed of ship
+	        System.out.println("Acceleration: " +calAcceleration(angle.x,angle.y)* 10);
 	}
          
 	if(input.isKeyDown(Input.KEY_D)){
@@ -110,9 +115,14 @@ public class Player {
 	 * Used for rendering all resources in Player class
 	 */
 	public void render()
-	{	
+	{
 		playerSprite.rotate(rotation);
 		playerSprite.draw(position.x,position.y,scale);
+	}
+	
+	double calAcceleration(double a, double b)
+	{
+		return Math.sqrt(Math.pow(a,2) + Math.pow(b,2));
 	}
 
 

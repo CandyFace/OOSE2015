@@ -2,7 +2,7 @@ package example;
 
 import java.util.Random;
 
-import javax.vecmath.Vector2f;
+import org.newdawn.slick.geom.Vector2f;
 
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -11,7 +11,7 @@ public class Asteroids {
 	
 	public float speed, rotation;
 	private Vector2f position, angle;
-	public float posX,posY,scale;
+	public float scale;
 	public Image asteroidSprite;
 	
 	Random rand = new Random();
@@ -29,7 +29,6 @@ public class Asteroids {
 	public Asteroids(float maxSpeed, float maxRotation) throws SlickException{
 		
 		
-
 		int rndX = rand.nextInt(SimpleSlickGame.WIDTH) + 1;
 		int rndY = rand.nextInt(SimpleSlickGame.HEIGHT) + 1;
 		

@@ -15,6 +15,7 @@ public class SimpleSlickGame extends BasicGame
 	Player playerObject = new Player();
 	public Asteroids asteroid;
 	float time = 0;
+
 	
 	static int WIDTH = 640;
 	static int HEIGHT = 480;
@@ -49,7 +50,7 @@ public class SimpleSlickGame extends BasicGame
 		
 		g.drawString("Hello World!", 250, 200);
 		g.drawString("This is bad", 200,100);
-
+	
 		asteroid.render();
 		
 		playerObject.render();//Call render method from Player class
