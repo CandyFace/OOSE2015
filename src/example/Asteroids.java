@@ -7,14 +7,10 @@ import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-public class Asteroids {
+public class Asteroids extends Init {
 	
-	public float speed, rotation;
 	public Image tileset;
 	public Image asteroidSprite;
-	
-	private Vector2f position, angle;
-	private float scale;
 	private Random rand = new Random();
 	private int rndDir = rand.nextInt(360);
 
@@ -66,23 +62,7 @@ public class Asteroids {
 		this.position.x += angle.x;
         this.position.y += angle.y;
         
-
-    	//Wrap player
-    	if(position.y < 0-(asteroidSprite.getHeight()*scale)) position.y = SimpleSlickGame.HEIGHT;
-    	if(position.y > SimpleSlickGame.HEIGHT) position.y = 0-(asteroidSprite.getHeight()*scale);
-    	if(position.x < 0-(asteroidSprite.getWidth()*scale)) position.x = SimpleSlickGame.WIDTH;
-    	if(position.x > SimpleSlickGame.WIDTH) position.x = 0-(asteroidSprite.getWidth()*scale);
- 
-	}
-	
-	/**
-	 *@return void
-	 * Used for variables which are to be used for rendering
-	 */
-	public void render(){
-		
-		asteroidSprite.draw(position.x,position.y,scale);
-		asteroidSprite.rotate(rotation);
+        wrapper(asteroidSprite);
 	}
 
 }
