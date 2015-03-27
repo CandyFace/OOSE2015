@@ -7,16 +7,17 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
 public class Player extends Init{
-	
-
-	private int maxSpeed = 10;
+    private int maxSpeed = 10;
 	private float accel = 0.5f;
 	private float delta = 0.033f;
-	private float rotationSpeed = 3;
-	private float direction = 0;
-	private float friction = 0.98f;
-	Image playerSprite;
-	
+	private float rotationSpeed = 3;	
+    private float direction = 0;
+	private float friction = 0.98f;	
+    Image playerSprite;
+
+    private boolean keyPressed = false;
+    private boolean leftPressed = false;
+
 	public Input input;
 
 	/**
@@ -33,14 +34,24 @@ public class Player extends Init{
 		playerSprite = new Image("graphics/Spaceship.gif");
 		playerSprite.setCenterOfRotation(playerSprite.getWidth() * scale / 2, playerSprite.getHeight() * scale / 2); //Set the origin of the player sprite
 	}
-	
-	
+
+
 	/**
 	 * @return void
 	 * used for updating everything in Player class
 	 */
 	public void update(){
-		playerMovement();   
+        InputControls();
+	}
+	
+	/**
+	 * @return void
+	 * Used for rendering all resources in Player class
+	 */
+	public void render()
+	{
+		playerSprite.rotate(rotation);
+		playerSprite.draw(position.x,position.y,scale);
 	}
 	
 	/**
@@ -48,19 +59,19 @@ public class Player extends Init{
 	 * Controls key inputs for playerMovement
 	 */
 	private void playerMovement() {
-		
-		wrapper(playerSprite);
-		
-	if(input.isKeyDown(Input.KEY_UP)){
-		
+
+        wrapper(playerSprite);
+	    if(keyPressed){
+
 		direction = playerSprite.getRotation();
+
+        speed+= accel * delta;
 		angle.x += (float) Math.cos(Math.toRadians(direction-90))* speed * delta;
 	    angle.y += (float) Math.sin(Math.toRadians(direction-90))* speed * delta;
-	    
+
 	    System.out.println(speed);
 	    System.out.println(maxSpeed);
-	    
-		speed+= accel * delta;
+
 		if(speed >= maxSpeed){
 			speed = maxSpeed;
 		}
@@ -70,10 +81,12 @@ public class Player extends Init{
 		
 		angle.x *= friction;
         angle.y *= friction;
-       
-		
+
+        //Speed of ship
+        System.out.println("Acceleration: " +calAcceleration(angle.x,angle.y)* 10);
+
 	}
-         else if(!input.isKeyDown(Input.KEY_UP)){
+        if(!keyPressed){
         	speed-= accel * delta;
 			
         	if(speed <= 0){
@@ -89,16 +102,15 @@ public class Player extends Init{
 	        //Speed of ship
 	        System.out.println("Acceleration: " +calAcceleration(angle.x,angle.y)* 10);
 	}
-         
-	if(input.isKeyDown(Input.KEY_D)){
+
+	if(leftPressed){
 		//Set player rotation
 		this.rotation = rotationSpeed;
 	}
-	else if (input.isKeyDown(Input.KEY_A)){
+	else if (!leftPressed){ // right
 		this.rotation = -rotationSpeed;
-	}	
-		else this.rotation = 0;
-	
+	}
+
 	
 	}
 	
@@ -106,6 +118,26 @@ public class Player extends Init{
 	{
 		return Math.sqrt(Math.pow(a,2) + Math.pow(b,2));
 	}
+
+    private void InputControls()
+    {
+        playerMovement();
+        if(input.isKeyDown(Input.KEY_UP)) {
+            keyPressed = true;
+        }
+        if(!input.isKeyDown(Input.KEY_UP)) {
+            keyPressed = false;
+        }
+        if(input.isKeyDown(Input.KEY_RIGHT))
+        {
+            leftPressed = true;
+        }
+        else if(input.isKeyDown(Input.KEY_LEFT))
+        {
+            leftPressed = false;
+        }
+        else rotation = 0;
+    }
 
 
 }
