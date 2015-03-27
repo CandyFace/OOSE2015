@@ -18,7 +18,6 @@ public class Asteroids {
 	private Random rand = new Random();
 	private int rndDir = rand.nextInt(360);
 
-	
 	/**
 	 * @param maxSpeed
 	 * @param maxRotation
