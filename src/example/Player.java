@@ -17,7 +17,7 @@ public class Player {
 	private Vector2f angle, position;
 	private float direction = 0;
 	private float friction = 0.98f;
-	private float scale = 0.05f;
+	private float scale = 0.8f;
 	private float rotation = 0;
 	private Image playerSprite;
 	
@@ -33,7 +33,7 @@ public class Player {
 	{
 		position = new Vector2f();
 		angle = new Vector2f();
-		playerSprite = new Image("graphics/playerWhite.png");
+		playerSprite = new Image("graphics/Spaceship.gif");
 		playerSprite.setCenterOfRotation(playerSprite.getWidth() * scale / 2, playerSprite.getHeight() * scale / 2); //Set the origin of the player sprite
 	}
 	

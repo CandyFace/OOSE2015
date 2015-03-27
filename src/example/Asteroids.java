@@ -20,8 +20,8 @@ public class Asteroids {
 
 	
 	/**
-	 * @param float maxSpeed
-	 * @param float maxRotation
+	 * @param maxSpeed
+	 * @param maxRotation
 	 */
 	public Asteroids(float maxSpeed, float maxRotation) throws SlickException{
 		int rndX = rand.nextInt(SimpleSlickGame.WIDTH) + 1;
@@ -34,13 +34,13 @@ public class Asteroids {
 		
 		this.position.x = rndX;
         this.position.y = rndY;
-		scale = 0.3f;
+		scale = 1.0f;
 		
 		this.speed = maxSpeed;
 		this.rotation = maxRotation;
 		
-		tileset = new Image("graphics/Asteroids.png");
-		asteroidSprite = tileset.getSubImage(0, 0, 197, 165);
+		tileset = new Image("graphics/AsteroidL1.png");
+		asteroidSprite = tileset.getSubImage(0, 0, 64, 64);
 		asteroidSprite.setCenterOfRotation(asteroidSprite.getWidth() * scale / 2, asteroidSprite.getHeight() * scale / 2); 
 		
 	}
