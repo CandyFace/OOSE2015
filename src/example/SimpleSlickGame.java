@@ -12,9 +12,10 @@ import org.newdawn.slick.SlickException;
 public class SimpleSlickGame extends BasicGame
 {
 	
-	Player playerObject = new Player();
+	public Player playerObject = new Player();
 	public Asteroids asteroid;
-
+	public Projectile proj;
+	
 	static int WIDTH = 640;
 	static int HEIGHT = 480;
 	
