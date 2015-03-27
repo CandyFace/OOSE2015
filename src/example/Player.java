@@ -7,7 +7,6 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
 public class Player {
-	
 
 	private double speed = 0;
 	private int maxSpeed = 10;
@@ -20,6 +19,9 @@ public class Player {
 	private float scale = 0.8f;
 	private float rotation = 0;
 	private Image playerSprite;
+
+    private boolean keyPressed = false;
+    private boolean leftPressed = false;
 	
 	public Input input;
 
@@ -43,7 +45,7 @@ public class Player {
 	 * used for updating everything in Player class
 	 */
 	public void update(){
-		playerMovement();   
+        InputControls();
 	}
 	
 	/**
@@ -61,14 +63,14 @@ public class Player {
 	 * Controls key inputs for playerMovement
 	 */
 	private void playerMovement() {
-		
-	if(input.isKeyDown(Input.KEY_UP)){
-		
+	if(keyPressed){
 		direction = playerSprite.getRotation();
+
+        speed+= accel * delta;
 		angle.x += (float) Math.cos(Math.toRadians(direction-90))* speed * delta;
 	    angle.y += (float) Math.sin(Math.toRadians(direction-90))* speed * delta;
 
-		speed+= accel * delta;
+
 		if(speed >= maxSpeed){
 			speed = maxSpeed;
 		}
@@ -80,10 +82,10 @@ public class Player {
         angle.y *= friction;
         
         //Speed of ship
-        System.out.println("Acceleration: " +Math.sqrt(Math.pow(angle.x,2) + Math.pow(angle.y,2)) * 10);
+        System.out.println("Acceleration: " +calAcceleration(angle.x,angle.y)* 10);
 		
 	}
-         else if(!input.isKeyDown(Input.KEY_UP)){
+        if(!keyPressed){
         	speed-= accel * delta;
 			
         	if(speed <= 0){
@@ -100,14 +102,13 @@ public class Player {
 	        System.out.println("Acceleration: " +calAcceleration(angle.x,angle.y)* 10);
 	}
          
-	if(input.isKeyDown(Input.KEY_D)){
+	if(leftPressed){
 		//Set player rotation
 		this.rotation = rotationSpeed;
 	}
-	else if (input.isKeyDown(Input.KEY_A)){
+	else if (!leftPressed){ // right
 		this.rotation = -rotationSpeed;
-	}	
-		else this.rotation = 0;
+	}
 	
 	//Wrap player
 	if(position.y < 0-(playerSprite.getHeight()*scale)) position.y = SimpleSlickGame.HEIGHT;
@@ -122,5 +123,23 @@ public class Player {
 		return Math.sqrt(Math.pow(a,2) + Math.pow(b,2));
 	}
 
-
+    private void InputControls()
+    {
+        playerMovement();
+        if(input.isKeyDown(Input.KEY_UP)) {
+            keyPressed = true;
+        }
+        if(!input.isKeyDown(Input.KEY_UP)) {
+            keyPressed = false;
+        }
+        if(input.isKeyDown(Input.KEY_RIGHT))
+        {
+            leftPressed = true;
+        }
+        else if(input.isKeyDown(Input.KEY_LEFT))
+        {
+            leftPressed = false;
+        }
+        else rotation = 0;
+    }
 }
