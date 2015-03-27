@@ -4,10 +4,10 @@ import org.newdawn.slick.geom.Vector2f;
 
 public class Init {
 	
-	Vector2f position, angle;
-	float scale;
-	float rotation;
-	float speed;
+	private Vector2f position, angle;
+	private float scale;
+	private float rotation;
+	private float speed;
 	
 	void wrapper(Image sprite){
 	//Screen wrap
@@ -27,4 +27,13 @@ public class Init {
 		sprite.draw(position.x,position.y,scale);
 	}
 
+	public Vector2f getPosition(){
+		return position;
+	}
+	public Vector2f getAngle(){
+		
+		return angle;
+	}
+	
+	
 }

@@ -14,7 +14,7 @@ public class SimpleSlickGame extends BasicGame
 	
 	public Player playerObject = new Player();
 	public Asteroids asteroid;
-	public Projectile proj;
+	public Projectile projectile;
 	
 	static int WIDTH = 640;
 	static int HEIGHT = 480;
@@ -40,7 +40,7 @@ public class SimpleSlickGame extends BasicGame
 		//System.out.println(time);
 		playerObject.update(); // Call update method from Player class
 	    asteroid.update();
-	       
+	       projectile.update();
 	}
 
 	@Override

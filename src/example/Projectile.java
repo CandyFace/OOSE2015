@@ -24,7 +24,19 @@ public class Projectile{
 	//current(for collision detection)
 	private ProjectileObj currentObj;
 	
-	public Vector2f getPosition(){
+	
+	
+	
+	
+	//constructor 
+	public Projectile(){//initialize, list starts empty!  
+		
+		
+	}
+	
+	
+	
+	public Vector2f getPosition(){//position of current obj
 		
 		return currentObj.pos;
 	}
@@ -33,18 +45,14 @@ public class Projectile{
 		boolean state = true;
 	
 		//check if current == last in list, if so state = false, otherwise current == next in list
-		
-		
-		
 		return state;
 	}
-	
-	
 	//creating projectileObj, need player position! 
-	
-	
-	public void update(Vector2f playerPos){//move projectiles, create new based on player position and key pressed! 
+	public void update(Vector2f playerPos){//move projectiles, create new obj based on player position and key pressed! 
 		
+		
+	}
+	public void render(){//loops through list and render all
 		
 	}
 	
