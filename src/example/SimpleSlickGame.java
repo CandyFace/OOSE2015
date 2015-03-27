@@ -51,7 +51,16 @@ public class SimpleSlickGame extends BasicGame
 	
 		playerObject.render(playerObject.playerSprite);
 		asteroid.render(asteroid.asteroidSprite);
+		//asteroid.getCollisionBox(asteroid.asteroidSprite);
 		
+		//Collision detection
+		if (asteroid.getCollisionBox(asteroid.asteroidSprite,10,10,-20,-20).intersects(playerObject.getCollisionBox(playerObject.playerSprite,5,5,-25,-25)))
+		{
+			System.out.println("COLLISION");
+			
+		}
+		g.drawRect(asteroid.position.x+10, asteroid.position.y+10, asteroid.asteroidSprite.getWidth()-20, asteroid.asteroidSprite.getHeight()-20);
+		g.drawRect(playerObject.position.x+5, playerObject.position.y+5, playerObject.playerSprite.getWidth()-25, playerObject.playerSprite.getHeight()-25);
 		//playerObject.render();//Call render method from Player class
 	}
 
@@ -70,6 +79,7 @@ public class SimpleSlickGame extends BasicGame
 			Logger.getLogger(SimpleSlickGame.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
+
 	
 	
 }

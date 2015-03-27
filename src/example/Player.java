@@ -1,7 +1,6 @@
 package example;
 
 import org.newdawn.slick.geom.Vector2f;
-
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
@@ -57,8 +56,8 @@ public class Player extends Init{
 		angle.x += (float) Math.cos(Math.toRadians(direction-90))* speed * delta;
 	    angle.y += (float) Math.sin(Math.toRadians(direction-90))* speed * delta;
 	    
-	    System.out.println(speed);
-	    System.out.println(maxSpeed);
+	    //System.out.println(speed);
+	    //System.out.println(maxSpeed);
 	    
 		speed+= accel * delta;
 		if(speed >= maxSpeed){
@@ -87,7 +86,7 @@ public class Player extends Init{
 	        angle.y *= friction; 
 	        
 	        //Speed of ship
-	        System.out.println("Acceleration: " +calAcceleration(angle.x,angle.y)* 10);
+	       System.out.println("Acceleration: " +calAcceleration(angle.x,angle.y)* 10);
 	}
          
 	if(input.isKeyDown(Input.KEY_D)){
@@ -106,6 +105,4 @@ public class Player extends Init{
 	{
 		return Math.sqrt(Math.pow(a,2) + Math.pow(b,2));
 	}
-
-
 }
