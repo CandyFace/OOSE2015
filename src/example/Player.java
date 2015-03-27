@@ -6,20 +6,16 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
-public class Player {
+public class Player extends Init{
 	
 
-	private double speed = 0;
 	private int maxSpeed = 10;
 	private float accel = 0.5f;
 	private float delta = 0.033f;
 	private float rotationSpeed = 3;
-	private Vector2f angle, position;
 	private float direction = 0;
 	private float friction = 0.98f;
-	private float scale = 0.8f;
-	private float rotation = 0;
-	private Image playerSprite;
+	Image playerSprite;
 	
 	public Input input;
 
@@ -33,6 +29,7 @@ public class Player {
 	{
 		position = new Vector2f();
 		angle = new Vector2f();
+		scale = 0.8f;
 		playerSprite = new Image("graphics/Spaceship.gif");
 		playerSprite.setCenterOfRotation(playerSprite.getWidth() * scale / 2, playerSprite.getHeight() * scale / 2); //Set the origin of the player sprite
 	}
@@ -48,26 +45,21 @@ public class Player {
 	
 	/**
 	 * @return void
-	 * Used for rendering all resources in Player class
-	 */
-	public void render()
-	{
-		playerSprite.rotate(rotation);
-		playerSprite.draw(position.x,position.y,scale);
-	}
-	
-	/**
-	 * @return void
 	 * Controls key inputs for playerMovement
 	 */
 	private void playerMovement() {
+		
+		wrapper(playerSprite);
 		
 	if(input.isKeyDown(Input.KEY_UP)){
 		
 		direction = playerSprite.getRotation();
 		angle.x += (float) Math.cos(Math.toRadians(direction-90))* speed * delta;
 	    angle.y += (float) Math.sin(Math.toRadians(direction-90))* speed * delta;
-
+	    
+	    System.out.println(speed);
+	    System.out.println(maxSpeed);
+	    
 		speed+= accel * delta;
 		if(speed >= maxSpeed){
 			speed = maxSpeed;
@@ -78,9 +70,7 @@ public class Player {
 		
 		angle.x *= friction;
         angle.y *= friction;
-        
-        //Speed of ship
-        System.out.println("Acceleration: " +Math.sqrt(Math.pow(angle.x,2) + Math.pow(angle.y,2)) * 10);
+       
 		
 	}
          else if(!input.isKeyDown(Input.KEY_UP)){
@@ -109,11 +99,6 @@ public class Player {
 	}	
 		else this.rotation = 0;
 	
-	//Wrap player
-	if(position.y < 0-(playerSprite.getHeight()*scale)) position.y = SimpleSlickGame.HEIGHT;
-	if(position.y > SimpleSlickGame.HEIGHT) position.y = 0-(playerSprite.getHeight()*scale);
-	if(position.x < 0-(playerSprite.getWidth()*scale)) position.x = SimpleSlickGame.WIDTH;
-	if(position.x > SimpleSlickGame.WIDTH) position.x = 0-(playerSprite.getWidth()*scale);
 	
 	}
 	

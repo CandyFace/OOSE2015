@@ -49,9 +49,10 @@ public class SimpleSlickGame extends BasicGame
 		g.drawString("Hello World!", 250, 200);
 		g.drawString("This is bad", 200,100);
 	
-		asteroid.render();
+		playerObject.render(playerObject.playerSprite);
+		asteroid.render(asteroid.asteroidSprite);
 		
-		playerObject.render();//Call render method from Player class
+		//playerObject.render();//Call render method from Player class
 	}
 
 	public static void main(String[] args)
