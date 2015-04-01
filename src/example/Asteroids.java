@@ -3,7 +3,6 @@ package example;
 import java.util.Random;
 
 import org.newdawn.slick.geom.Vector2f;
-
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
@@ -64,5 +63,4 @@ public class Asteroids extends Init {
         
         wrapper(asteroidSprite);
 	}
-
 }

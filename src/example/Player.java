@@ -1,7 +1,6 @@
 package example;
 
 import org.newdawn.slick.geom.Vector2f;
-
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
@@ -100,7 +99,7 @@ public class Player extends Init{
 	        angle.y *= friction; 
 	        
 	        //Speed of ship
-	        System.out.println("Acceleration: " +calAcceleration(angle.x,angle.y)* 10);
+	       System.out.println("Acceleration: " +calAcceleration(angle.x,angle.y)* 10);
 	}
 
 	if(leftPressed){
@@ -138,6 +137,4 @@ public class Player extends Init{
         }
         else rotation = 0;
     }
-
-
 }
