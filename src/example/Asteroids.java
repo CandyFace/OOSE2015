@@ -15,12 +15,12 @@ public class Asteroids extends Init {
 	private int rndDir = rand.nextInt(360);
 
 	/**
-	 * @param maxSpeed
-	 * @param maxRotation
+	 * @param maxSpeed float
+	 * @param maxRotation float
 	 */
 	public Asteroids(float maxSpeed, float maxRotation) throws SlickException{
-		int rndX = rand.nextInt(SimpleSlickGame.WIDTH) + 1;
-		int rndY = rand.nextInt(SimpleSlickGame.HEIGHT) + 1;
+		int rndX = rand.nextInt(Main.WIDTH) + 1;
+		int rndY = rand.nextInt(Main.HEIGHT) + 1;
 		
 		//50 is the maximum and the 1 is our minimum 
 		

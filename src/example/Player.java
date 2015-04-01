@@ -10,9 +10,9 @@ public class Player extends Init{
     private int maxSpeed = 10;
 	private float accel = 0.5f;
 	private float delta = 0.033f;
-	private float rotationSpeed = 3;	
+	private float rotationSpeed = 3;
     private float direction = 0;
-	private float friction = 0.98f;	
+	private float friction = 0.98f;
     Image playerSprite;
 
     private boolean keyPressed = false;
@@ -36,6 +36,7 @@ public class Player extends Init{
 	}
 
 
+
 	/**
 	 * @return void
 	 * used for updating everything in Player class
@@ -50,8 +51,7 @@ public class Player extends Init{
 	 */
 	public void render()
 	{
-		playerSprite.rotate(rotation);
-		playerSprite.draw(position.x,position.y,scale);
+
 	}
 	
 	/**

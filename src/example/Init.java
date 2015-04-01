@@ -11,10 +11,10 @@ public class Init {
 	
 	void wrapper(Image sprite){
 	//Screen wrap
-	if(position.y < 0-(sprite.getHeight()*scale)) position.y = SimpleSlickGame.HEIGHT;
-	if(position.y > SimpleSlickGame.HEIGHT) position.y = 0-(sprite.getHeight()*scale);
-	if(position.x < 0-(sprite.getWidth()*scale)) position.x = SimpleSlickGame.WIDTH;
-	if(position.x > SimpleSlickGame.WIDTH) position.x = 0-(sprite.getWidth()*scale);
+	if(position.y < 0-(sprite.getHeight()*scale)) position.y = Main.HEIGHT;
+	if(position.y > Main.HEIGHT) position.y = 0-(sprite.getHeight()*scale);
+	if(position.x < 0-(sprite.getWidth()*scale)) position.x = Main.WIDTH;
+	if(position.x > Main.WIDTH) position.x = 0-(sprite.getWidth()*scale);
 	}
 	
 	/**
