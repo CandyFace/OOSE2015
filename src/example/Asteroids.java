@@ -24,14 +24,14 @@ public class Asteroids extends Init {
 		//50 is the maximum and the 1 is our minimum 
 		
 		position = new Vector2f();
-		angle = new Vector2f();
+		displacement = new Vector2f();
 		
 		this.position.x = rndX;
         this.position.y = rndY;
 		scale = 1.0f;
 		
 		this.speed = maxSpeed;
-		this.rotation = maxRotation;
+		this._rotationSpeed = maxRotation;
 		
 		tileset = new Image("graphics/AsteroidL1.png");
 		asteroidSprite = tileset.getSubImage(0, 0, 64, 64);
@@ -55,11 +55,11 @@ public class Asteroids extends Init {
 	 */
 	private void move(){
 		
-		angle.x = (float) Math.cos(Math.toRadians(rndDir))* speed;
-	    angle.y = (float) Math.sin(Math.toRadians(rndDir)) * speed;
+		displacement.x = (float) Math.cos(Math.toRadians(rndDir))* speed;
+	    displacement.y = (float) Math.sin(Math.toRadians(rndDir)) * speed;
 		
-		this.position.x += angle.x;
-        this.position.y += angle.y;
+		this.position.x += displacement.x;
+        this.position.y += displacement.y;
         
         wrapper(asteroidSprite);
 	}

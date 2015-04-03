@@ -6,10 +6,19 @@ import org.newdawn.slick.geom.Vector2f;
 
 public class Init {
 	
-	Vector2f position, angle;
-	float scale;
-	float rotation;
-	float speed;
+	Vector2f position,
+            displacement;  //former angle variable.
+
+    float scale;
+    float rotationSpeed = 3;
+    float _rotationSpeed;
+    float speed;
+    float direction = 0;
+    int maxSpeed = 10;
+    float accel = 0.5f;
+    float delta = 0.033f;
+    float friction = 0.98f;
+    Image playerSprite;
 	
 	void wrapper(Image sprite){
 	//Screen wrap
@@ -27,10 +36,14 @@ public class Init {
 	 *@return void
 	 * Used for variables which are to be used for rendering
 	 */
+
+
+    void update(Image sprite){
+        sprite.rotate(_rotationSpeed); //updates the rotation speed
+    }
 	void render(Image sprite){
-		
-		sprite.rotate(rotation);
-		sprite.draw(position.x,position.y,scale);
+
+		sprite.draw(position.x,position.y,scale); // draws player sprite
 	}
 
 }

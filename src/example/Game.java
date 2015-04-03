@@ -44,6 +44,8 @@ public class Game extends BasicGameState {
         //time += delta;
 
         //System.out.println(time);
+        playerObject.update(playerObject.playerSprite);
+        asteroid.update(asteroid.asteroidSprite);
         if(!Menu.paused) {
             playerObject.update(); // Call update method from Player class
             asteroid.update();

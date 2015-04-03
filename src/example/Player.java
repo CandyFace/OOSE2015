@@ -6,18 +6,12 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
 public class Player extends Init{
-    private int maxSpeed = 10;
-	private float accel = 0.5f;
-	private float delta = 0.033f;
-	private float rotationSpeed = 3;
-    private float direction = 0;
-	private float friction = 0.98f;
-    Image playerSprite;
 
     private boolean keyPressed = false;
     private boolean leftPressed = false;
 
 	public Input input;
+
 
 	/**
 	 *
@@ -28,7 +22,7 @@ public class Player extends Init{
 	public void init() throws SlickException
 	{
 		position = new Vector2f();
-		angle = new Vector2f();
+		displacement = new Vector2f();
 		scale = 0.8f;
 		playerSprite = new Image("graphics/Spaceship.gif");
 		playerSprite.setCenterOfRotation(playerSprite.getWidth() * scale / 2, playerSprite.getHeight() * scale / 2); //Set the origin of the player sprite
@@ -65,8 +59,8 @@ public class Player extends Init{
 		direction = playerSprite.getRotation();
 
         speed+= accel * delta;
-		angle.x += (float) Math.cos(Math.toRadians(direction-90))* speed * delta;
-	    angle.y += (float) Math.sin(Math.toRadians(direction-90))* speed * delta;
+		displacement.x += (float) Math.cos(Math.toRadians(direction-90))* speed * delta;
+	    displacement.y += (float) Math.sin(Math.toRadians(direction-90))* speed * delta;
 
 	    System.out.println(speed);
 	    System.out.println(maxSpeed);
@@ -75,14 +69,14 @@ public class Player extends Init{
 			speed = maxSpeed;
 		}
 
-		position.x += angle.x;
-		position.y += angle.y;
+		position.x += displacement.x;
+		position.y += displacement.y;
 		
-		angle.x *= friction;
-        angle.y *= friction;
+		displacement.x *= friction;
+        displacement.y *= friction;
 
         //Speed of ship
-        System.out.println("Acceleration: " +calAcceleration(angle.x,angle.y)* 10);
+        System.out.println("Acceleration: " +calAcceleration(displacement.x,displacement.y)* 10);
 
 	}
         if(!keyPressed){
@@ -92,22 +86,22 @@ public class Player extends Init{
 				speed = 0;
 			}
 
-			position.x += angle.x;
-			position.y += angle.y;
+			position.x += displacement.x;
+			position.y += displacement.y;
 			
-			angle.x *= friction;
-	        angle.y *= friction; 
+			displacement.x *= friction;
+	        displacement.y *= friction;
 	        
 	        //Speed of ship
-	       System.out.println("Acceleration: " +calAcceleration(angle.x,angle.y)* 10);
+	       System.out.println("Acceleration: " +calAcceleration(displacement.x,displacement.y)* 10);
 	}
 
 	if(leftPressed){
 		//Set player rotation
-		this.rotation = rotationSpeed;
+		_rotationSpeed = rotationSpeed;
 	}
-	else if (!leftPressed){ // right
-		this.rotation = -rotationSpeed;
+	else { // right
+		_rotationSpeed = -rotationSpeed;
 	}
 
 	
@@ -135,6 +129,6 @@ public class Player extends Init{
         {
             leftPressed = false;
         }
-        else rotation = 0;
+        else _rotationSpeed = 0;
     }
 }
