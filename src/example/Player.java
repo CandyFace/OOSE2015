@@ -28,6 +28,13 @@ public class Player extends Init{
 		playerSprite.setCenterOfRotation(playerSprite.getWidth() * scale / 2, playerSprite.getHeight() * scale / 2); //Set the origin of the player sprite
 	}
 
+    public void highScoreCounter()
+    {
+        if (input.isKeyPressed(Input.KEY_E))
+        {
+            score += 50;
+        }
+    }
 
 
 	/**
@@ -36,16 +43,13 @@ public class Player extends Init{
 	 */
 	public void update(){
         InputControls();
+        highScoreCounter();
 	}
 	
 	/**
 	 * @return void
 	 * Used for rendering all resources in Player class
 	 */
-	public void render()
-	{
-
-	}
 	
 	/**
 	 * @return void

@@ -61,6 +61,8 @@ public class Game extends BasicGameState {
         playerObject.render(playerObject.playerSprite);
         asteroid.render(asteroid.asteroidSprite);
 
+        g.drawString("Score: " + playerObject.score, (Main.WIDTH / 3) - 200, (Main.HEIGHT / 3) - 100);
+
         //playerObject.render();//Call render method from Player class
     }
 

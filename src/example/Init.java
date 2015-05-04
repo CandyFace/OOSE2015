@@ -5,7 +5,6 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Vector2f;
 
 public class Init {
-	
 	Vector2f position,
             displacement;  //former angle variable.
 
@@ -18,6 +17,7 @@ public class Init {
     float accel = 0.5f;
     float delta = 0.033f;
     float friction = 0.98f;
+    int score = 0;
     Image playerSprite;
 	
 	void wrapper(Image sprite){
