@@ -6,14 +6,12 @@ import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
-/**
- * Created by CandyFace on 01/04/15.
- */
 public class Menu extends BasicGameState {
 
     private StateBasedGame game;
     static boolean paused = false;
     private int gameId;
+    private boolean pressedESC = false;
 
     public Menu(int gameId) {
         this.gameId = gameId;
@@ -54,6 +52,13 @@ public class Menu extends BasicGameState {
     @Override
     public void update(GameContainer gc, StateBasedGame game, int delta)
             throws SlickException {
+
+        //If boolean true
+        //close game
+        if(pressedESC)
+        {
+            gc.exit();
+        }
     }
 
     @Override
@@ -71,8 +76,7 @@ public class Menu extends BasicGameState {
                 // TODO: Implement later
                 break;
             case Input.KEY_ESCAPE:
-                // TODO: close game properly with gc.exit() somehow..
-                System.exit(0);
+                pressedESC = true;
                 break;
             default:
                 break;
