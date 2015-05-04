@@ -9,16 +9,18 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
 
-public class SimpleSlickGame extends BasicGame
+public class Game extends BasicGame
 {
 	
 	Player playerObject = new Player();
-	public Asteroids asteroid;
+	//public Asteroids asteroid;
+	
+	Asteroids[] asteroids = new Asteroids[10];
 
 	static int WIDTH = 640;
 	static int HEIGHT = 480;
 	
-	public SimpleSlickGame(String gamename)
+	public Game(String gamename)
 	{
 		super(gamename);
 	}
@@ -26,7 +28,11 @@ public class SimpleSlickGame extends BasicGame
 	@Override
 	public void init(GameContainer gc) throws SlickException {
 		
-		asteroid = new Asteroids(2f, 5f);
+		
+		for(int i = 0; i < asteroids.length; i++){
+			asteroids[i] = new Asteroids(2f,i);
+		}
+		//asteroid = new Asteroids(2f, 5f);
 		playerObject.init(); //Call init method from Player class
 		playerObject.input = gc.getInput(); //Init input class
 		
@@ -38,7 +44,9 @@ public class SimpleSlickGame extends BasicGame
 		
 		//System.out.println(time);
 		playerObject.update(); // Call update method from Player class
-	    asteroid.update();
+		for(int i = 0; i < asteroids.length; i++){
+	    asteroids[i].update();
+		}
 	       
 	}
 
@@ -50,18 +58,21 @@ public class SimpleSlickGame extends BasicGame
 		g.drawString("This is bad", 200,100);
 	
 		playerObject.render(playerObject.playerSprite);
-		asteroid.render(asteroid.asteroidSprite);
+		for(int i = 0; i < asteroids.length; i++){
+			asteroids[i].render(asteroids[i].asteroidSprite);
+		
 		//asteroid.getCollisionBox(asteroid.asteroidSprite);
 		
 		//Collision detection
-		if (asteroid.getCollisionBox(asteroid.asteroidSprite,10,10,-20,-20).intersects(playerObject.getCollisionBox(playerObject.playerSprite,5,5,-25,-25)))
+		if (asteroids[i].getCollisionBox(asteroids[i].asteroidSprite,10,10,-20,-20).intersects(playerObject.getCollisionBox(playerObject.playerSprite,5,5,-25,-25)))
 		{
 			System.out.println("COLLISION");
 			
 		}
-		g.drawRect(asteroid.position.x+10, asteroid.position.y+10, asteroid.asteroidSprite.getWidth()-20, asteroid.asteroidSprite.getHeight()-20);
+		g.drawRect(asteroids[i].position.x+10, asteroids[i].position.y+10, asteroids[i].asteroidSprite.getWidth()-20, asteroids[i].asteroidSprite.getHeight()-20);
 		g.drawRect(playerObject.position.x+5, playerObject.position.y+5, playerObject.playerSprite.getWidth()-25, playerObject.playerSprite.getHeight()-25);
 		//playerObject.render();//Call render method from Player class
+		}
 	}
 
 	public static void main(String[] args)
@@ -69,14 +80,14 @@ public class SimpleSlickGame extends BasicGame
 		try
 		{
 			AppGameContainer appgc;
-			appgc = new AppGameContainer(new SimpleSlickGame("Simple Slick Game"));
+			appgc = new AppGameContainer(new Game("Simple Slick Game"));
 			appgc.setDisplayMode(WIDTH, HEIGHT, false);
 			appgc.setTargetFrameRate(60);
 			appgc.start();
 		}
 		catch (SlickException ex)
 		{
-			Logger.getLogger(SimpleSlickGame.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
 

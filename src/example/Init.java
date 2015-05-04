@@ -13,10 +13,10 @@ public class Init {
 	
 	void wrapper(Image sprite){
 	//Screen wrap
-	if(position.y < 0-(sprite.getHeight()*scale)) position.y = SimpleSlickGame.HEIGHT;
-	if(position.y > SimpleSlickGame.HEIGHT) position.y = 0-(sprite.getHeight()*scale);
-	if(position.x < 0-(sprite.getWidth()*scale)) position.x = SimpleSlickGame.WIDTH;
-	if(position.x > SimpleSlickGame.WIDTH) position.x = 0-(sprite.getWidth()*scale);
+	if(position.y < 0-(sprite.getHeight()*scale)) position.y = Game.HEIGHT;
+	if(position.y > Game.HEIGHT) position.y = 0-(sprite.getHeight()*scale);
+	if(position.x < 0-(sprite.getWidth()*scale)) position.x = Game.WIDTH;
+	if(position.x > Game.WIDTH) position.x = 0-(sprite.getWidth()*scale);
 	}
 	
 	Rectangle getCollisionBox(Image sprite, int offsetX, int offsetY, int offsetWidth, int offsetHeight) {
