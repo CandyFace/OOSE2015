@@ -39,6 +39,11 @@ public class Player extends Init{
 	 * @return void
 	 * used for updating everything in Player class
 	 */
+	public float getRotation(){
+		return playerSprite.getRotation();
+		
+	}
+	
 	public void update(){
 		playerMovement();   
 	}
@@ -54,7 +59,8 @@ public class Player extends Init{
 	if(input.isKeyDown(Input.KEY_UP)){
 		
 		direction = playerSprite.getRotation();
-		angle.x += (float) Math.cos(Math.toRadians(direction-90))* speed * delta;
+		//direction = this.rotation;
+		angle.x += (float) Math.cos(Math.toRadians(direction-90))* speed * delta;//displaces the player
 	    angle.y += (float) Math.sin(Math.toRadians(direction-90))* speed * delta;
 	    
 	    System.out.println(speed);

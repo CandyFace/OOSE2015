@@ -25,14 +25,16 @@ public class SimpleSlickGame extends BasicGame
 	}
 
 	@Override
-	public void init(GameContainer gc) throws SlickException {
+	public void init(GameContainer gc) throws SlickException {//constructor
 		
 		asteroid = new Asteroids(2f, 5f);
 		playerObject.init(); //Call init method from Player class
 		playerObject.input = gc.getInput(); //Init input class
-		
+		projectile = new Projectile();
+		projectile.input = gc.getInput(); //Init input class
 	}
 
+	//////////////////// methods ////////////////////////////
 	@Override
 	public void update(GameContainer gc, int delta) throws SlickException {
 		//time += delta;
@@ -40,7 +42,10 @@ public class SimpleSlickGame extends BasicGame
 		//System.out.println(time);
 		playerObject.update(); // Call update method from Player class
 	    asteroid.update();
-	       projectile.update();
+	  
+	    System.out.print("number of times ");
+	      System.out.println("Projectile update run :"+ 
+	    projectile.update(playerObject.getPosition(), playerObject.getRotation()));
 	}
 
 	@Override
@@ -52,6 +57,11 @@ public class SimpleSlickGame extends BasicGame
 	
 		playerObject.render(playerObject.playerSprite);
 		asteroid.render(asteroid.asteroidSprite);
+		
+		
+		System.out.println("Main render");
+	    System.out.println(projectile.render());
+		
 		
 		//playerObject.render();//Call render method from Player class
 	}
