@@ -168,7 +168,7 @@ private boolean isJammed;
 
 	private void createProjectiles(Vector2f playerPos, float playerRotation) {
 		// ///////creating new projectiles!!!/////////////
-		if (input.isKeyDown(Input.KEY_SPACE) && projectileCount <= maxProjectile && !isJammed) {
+		if (input.isKeyPressed(Input.KEY_SPACE) && projectileCount <= maxProjectile && !isJammed) {
 			System.out.println("Space is pressed");
 			
 			isJammed = true;

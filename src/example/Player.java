@@ -1,23 +1,17 @@
 package example;
 
 import org.newdawn.slick.geom.Vector2f;
-
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
 public class Player extends Init{
-	
 
-	private int maxSpeed = 10;
-	private float accel = 0.5f;
-	private float delta = 0.033f;
-	private float rotationSpeed = 3;
-	private float direction = 0;
-	private float friction = 0.98f;
-	Image playerSprite;
-	
+    private boolean keyPressed = false;
+    private boolean leftPressed = false;
+
 	public Input input;
+
 
 	/**
 	 *
@@ -28,13 +22,14 @@ public class Player extends Init{
 	public void init() throws SlickException
 	{
 		position = new Vector2f();
-		angle = new Vector2f();
+		displacement = new Vector2f();
 		scale = 0.8f;
 		playerSprite = new Image("graphics/Spaceship.gif");
 		playerSprite.setCenterOfRotation(playerSprite.getWidth() * scale / 2, playerSprite.getHeight() * scale / 2); //Set the origin of the player sprite
 	}
-	
-	
+
+
+
 	/**
 	 * @return void
 	 * used for updating everything in Player class
@@ -45,7 +40,16 @@ public class Player extends Init{
 	}
 	
 	public void update(){
-		playerMovement();   
+        InputControls();
+	}
+	
+	/**
+	 * @return void
+	 * Used for rendering all resources in Player class
+	 */
+	public void render()
+	{
+
 	}
 	
 	/**
@@ -53,58 +57,58 @@ public class Player extends Init{
 	 * Controls key inputs for playerMovement
 	 */
 	private void playerMovement() {
-		
-		wrapper(playerSprite);
-		
-	if(input.isKeyDown(Input.KEY_UP)){
-		
+
+        wrapper(playerSprite);
+	    if(keyPressed){
+
 		direction = playerSprite.getRotation();
-		//direction = this.rotation;
-		angle.x += (float) Math.cos(Math.toRadians(direction-90))* speed * delta;//displaces the player
-	    angle.y += (float) Math.sin(Math.toRadians(direction-90))* speed * delta;
-	    
+
+        speed+= accel * delta;
+		displacement.x += (float) Math.cos(Math.toRadians(direction-90))* speed * delta;
+	    displacement.y += (float) Math.sin(Math.toRadians(direction-90))* speed * delta;
+
 	    System.out.println(speed);
 	    System.out.println(maxSpeed);
-	    
-		speed+= accel * delta;
+
 		if(speed >= maxSpeed){
 			speed = maxSpeed;
 		}
 
-		position.x += angle.x;
-		position.y += angle.y;
+		position.x += displacement.x;
+		position.y += displacement.y;
 		
-		angle.x *= friction;
-        angle.y *= friction;
-       
-		
+		displacement.x *= friction;
+        displacement.y *= friction;
+
+        //Speed of ship
+        System.out.println("Acceleration: " +calAcceleration(displacement.x,displacement.y)* 10);
+
 	}
-         else if(!input.isKeyDown(Input.KEY_UP)){
+        if(!keyPressed){
         	speed-= accel * delta;
 			
         	if(speed <= 0){
 				speed = 0;
 			}
 
-			position.x += angle.x;
-			position.y += angle.y;
+			position.x += displacement.x;
+			position.y += displacement.y;
 			
-			angle.x *= friction;
-	        angle.y *= friction; 
+			displacement.x *= friction;
+	        displacement.y *= friction;
 	        
 	        //Speed of ship
-	        System.out.println("Acceleration: " +calAcceleration(angle.x,angle.y)* 10);
+	       System.out.println("Acceleration: " +calAcceleration(displacement.x,displacement.y)* 10);
 	}
-         
-	if(input.isKeyDown(Input.KEY_D)){
+
+	if(leftPressed){
 		//Set player rotation
-		this.rotation = rotationSpeed;
+		_rotationSpeed = rotationSpeed;
 	}
-	else if (input.isKeyDown(Input.KEY_A)){
-		this.rotation = -rotationSpeed;
-	}	
-		else this.rotation = 0;
-	
+	else { // right
+		_rotationSpeed = -rotationSpeed;
+	}
+
 	
 	}
 	
@@ -113,5 +117,23 @@ public class Player extends Init{
 		return Math.sqrt(Math.pow(a,2) + Math.pow(b,2));
 	}
 
-
+    private void InputControls()
+    {
+        playerMovement();
+        if(input.isKeyDown(Input.KEY_UP)) {
+            keyPressed = true;
+        }
+        if(!input.isKeyDown(Input.KEY_UP)) {
+            keyPressed = false;
+        }
+        if(input.isKeyDown(Input.KEY_RIGHT))
+        {
+            leftPressed = true;
+        }
+        else if(input.isKeyDown(Input.KEY_LEFT))
+        {
+            leftPressed = false;
+        }
+        else _rotationSpeed = 0;
+    }
 }
