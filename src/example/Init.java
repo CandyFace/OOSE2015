@@ -6,7 +6,8 @@ import org.newdawn.slick.geom.Vector2f;
 
 public class Init {
 	Vector2f position,
-            displacement;  //former angle variable.
+            displacement,
+            angle;  //former angle variable.
 
     float scale;
     float rotationSpeed = 3;
@@ -46,4 +47,13 @@ public class Init {
 		sprite.draw(position.x,position.y,scale); // draws player sprite
 	}
 
+	public Vector2f getPosition(){
+		return position;
+	}
+	public Vector2f getAngle(){
+		
+		return angle;
+	}
+	
+	
 }

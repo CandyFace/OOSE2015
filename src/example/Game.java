@@ -17,6 +17,7 @@ public class Game extends BasicGameState {
 
     Player playerObject = new Player();
     public Asteroids asteroid;
+	public Projectile projectile;
     private int gameId;
 
 
@@ -36,6 +37,9 @@ public class Game extends BasicGameState {
         playerObject.init(); //Call init method from Player class
         playerObject.input = gc.getInput(); //Init input class
 
+    	projectile = new Projectile();
+		projectile.input = gc.getInput(); //Init input class
+        
     }
 
 
@@ -46,6 +50,7 @@ public class Game extends BasicGameState {
         //System.out.println(time);
         playerObject.update(playerObject.playerSprite);
         asteroid.update(asteroid.asteroidSprite);
+        projectile.update(playerObject.getPosition(), playerObject.getRotation());
         if(!Menu.paused) {
             playerObject.update(); // Call update method from Player class
             asteroid.update();
@@ -63,6 +68,7 @@ public class Game extends BasicGameState {
 
         g.drawString("Score: " + playerObject.score, (Main.WIDTH / 3) - 200, (Main.HEIGHT / 3) - 100);
 
+        projectile.render();
         //playerObject.render();//Call render method from Player class
     }
 

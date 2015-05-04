@@ -41,6 +41,11 @@ public class Player extends Init{
 	 * @return void
 	 * used for updating everything in Player class
 	 */
+	public float getRotation(){
+		return playerSprite.getRotation();
+		
+	}
+	
 	public void update(){
         InputControls();
         highScoreCounter();
