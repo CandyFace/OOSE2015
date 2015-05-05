@@ -328,13 +328,13 @@ private int timer;
 		void wrapper(Image sprite) {
 			// Screen wrap
 			if (position.y < 0 - (sprite.getHeight() * scale))
-				position.y = SimpleSlickGame.HEIGHT;// resets position when
+				position.y = Main.HEIGHT;// resets position when
 													// exiting frame
-			if (position.y > SimpleSlickGame.HEIGHT)
+			if (position.y > Main.HEIGHT)
 				position.y = 0 - (sprite.getHeight() * scale);
 			if (position.x < 0 - (sprite.getWidth() * scale))
-				position.x = SimpleSlickGame.WIDTH;
-			if (position.x > SimpleSlickGame.WIDTH)
+				position.x = Main.WIDTH;
+			if (position.x > Main.WIDTH)
 				position.x = 0 - (sprite.getWidth() * scale);
 		}
 
