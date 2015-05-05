@@ -4,6 +4,8 @@ import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Animation;
+import org.newdawn.slick.SpriteSheet;
 
 public class Player extends Init{
 
@@ -11,8 +13,6 @@ public class Player extends Init{
     private boolean leftPressed = false;
 
 	public Input input;
-
-
 	/**
 	 *
 	 * @throws SlickException
@@ -24,11 +24,12 @@ public class Player extends Init{
 		position = new Vector2f();
 		displacement = new Vector2f();
 		scale = 0.8f;
-		playerSprite = new Image("graphics/Spaceship.gif");
+        tileset = new Image("graphics/spaceShipSheet.png");
+		playerSprite = tileset.getSubImage(0, 0, 64, 64);
 		playerSprite.setCenterOfRotation(playerSprite.getWidth() * scale / 2, playerSprite.getHeight() * scale / 2); //Set the origin of the player sprite
-	}
+    }
 
-    public void highScoreCounter()
+    public void scoreCounter()
     {
         if (input.isKeyPressed(Input.KEY_E))
         {
@@ -48,13 +49,8 @@ public class Player extends Init{
 	
 	public void update(){
         InputControls();
-        highScoreCounter();
+        scoreCounter();
 	}
-	
-	/**
-	 * @return void
-	 * Used for rendering all resources in Player class
-	 */
 	
 	/**
 	 * @return void

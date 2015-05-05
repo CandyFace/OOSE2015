@@ -1,7 +1,9 @@
 package example;
 import java.awt.Rectangle;
 
+import org.newdawn.slick.Animation;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.geom.Vector2f;
 
 public class Init {
@@ -20,6 +22,7 @@ public class Init {
     float friction = 0.98f;
     int score = 0;
     Image playerSprite;
+    Image tileset;
 	
 	void wrapper(Image sprite){
 	//Screen wrap
@@ -34,18 +37,22 @@ public class Init {
 	}
 	
 	/**
-	 *@return void
-	 * Used for variables which are to be used for rendering
+	 *@param sprite
+	 * Used for variables which are to be used for updating
 	 */
-
-
     void update(Image sprite){
         sprite.rotate(_rotationSpeed); //updates the rotation speed
     }
+
+    /**
+     *@param sprite
+     * Used for variables which are to be used for rendering
+     */
 	void render(Image sprite){
 
 		sprite.draw(position.x,position.y,scale); // draws player sprite
 	}
+
 
 	public Vector2f getPosition(){
 		return position;

@@ -8,6 +8,11 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 
 public class Menu extends BasicGameState {
 
+    /**
+     * This class should only contain menu variables, functions etc..
+     *
+     */
+
     private StateBasedGame game;
     static boolean paused = false;
     private int gameId;
@@ -30,7 +35,8 @@ public class Menu extends BasicGameState {
             throws SlickException {
             g.setColor(Color.white);
 
-
+        //If boolean paused is true
+        // draw text in menu state
         if(paused)
         {
             g.drawString("GAME PAUSED", Main.WIDTH / 2.5f, (Main.HEIGHT - 60) / 2.5f);
@@ -54,7 +60,7 @@ public class Menu extends BasicGameState {
             throws SlickException {
 
         //If boolean true
-        //close game
+        //exit game
         if(pressedESC)
         {
             gc.exit();

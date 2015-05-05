@@ -20,10 +20,11 @@ public class Game extends BasicGameState {
 	public Projectile projectile;
     private int gameId;
 
+    public Animation startupAnimation;
+    public SpriteSheet shipSS;
 
     /**
-     * @param gameId
-     * defines gamestate
+     * @param gameId defines gamestate
      */
     public Game(int gameId) {
         this.gameId = gameId;
@@ -39,18 +40,35 @@ public class Game extends BasicGameState {
 
     	projectile = new Projectile();
 		projectile.input = gc.getInput(); //Init input class
-        
+
+        shipSS = new SpriteSheet("graphics/SpaceshipSheet.png", 64, 64);
+
+        startupAnimation = new Animation();
+   /*     startupAnimation.addFrame(shipSS.getSprite(0, 0), 300);
+        startupAnimation.addFrame(shipSS.getSprite(1, 0), 300);
+        startupAnimation.addFrame(shipSS.getSprite(2, 0), 300);
+        startupAnimation.addFrame(shipSS.getSprite(3, 0), 300);
+        startupAnimation.addFrame(shipSS.getSprite(4, 0), 300);
+        startupAnimation.addFrame(shipSS.getSprite(5, 0), 300);
+        */
+
+        startupAnimation = new Animation(shipSS,
+                new int[]{0,0, 1,0, 2,0 ,3,0 ,4,0 ,5,0}, // x, y position taken from SpriteSheet
+                new int[]{300, 300, 300, 300, 300, 300}); // duration
+
+
+
     }
 
 
     @Override
     public void update(GameContainer gc, StateBasedGame game, int delta) throws SlickException {
-        //time += delta;
-
-        //System.out.println(time);
         playerObject.update(playerObject.playerSprite);
         asteroid.update(asteroid.asteroidSprite);
         projectile.update(playerObject.getPosition(), playerObject.getRotation());
+
+        startupAnimation.update(delta);
+
         if(!Menu.paused) {
             playerObject.update(); // Call update method from Player class
             asteroid.update();
@@ -62,7 +80,7 @@ public class Game extends BasicGameState {
     @Override
     public void render(GameContainer gc, StateBasedGame game, Graphics g) throws SlickException
     {
-
+        startupAnimation.draw(100,100);
         playerObject.render(playerObject.playerSprite);
         asteroid.render(asteroid.asteroidSprite);
 
@@ -80,14 +98,13 @@ public class Game extends BasicGameState {
 
     /**
      *
-     * @param key
-     * @param c
-     * returns gameState to menu
+     * @param key defines that a key is needed.
+     * @param c expects only one char
      */
     public void keyReleased(int key, char c) {
         switch(key) {
             case Input.KEY_ESCAPE:
-                game.enterState(Main.menu);
+                game.enterState(Main.menu); //Goto main when pressing ESC
                 Menu.paused = true;
                 break;
             default:
