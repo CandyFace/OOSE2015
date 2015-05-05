@@ -96,12 +96,12 @@ private boolean isJammed;
 	//	lastMs;
 		
 		
-		System.out.println("inside projectile update");
+	//	System.out.println("inside projectile update");
 
 		createProjectiles(playerPos, playerRotation);
 		// shoot!! creates new bullets
 
-		System.out.println("inside projectile update 2");
+	//	System.out.println("inside projectile update 2");
 
 		// ///
 		moveProjectiles();
@@ -110,10 +110,11 @@ private boolean isJammed;
 
 		// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		System.out.println("inside projectile update 3");
+	//	System.out.println("inside projectile update 3");
 		// ///////////// counting projectiles ////////////////////
-		System.out.println("number of projectiles in list: "
-				+ projectileCount());
+
+		//System.out.println("number of projectiles in list: "
+		//		+ projectileCount());
 
 		count++;
 		return count;
@@ -192,7 +193,7 @@ private boolean isJammed;
 
 	public boolean render() {// loops through list and render all
 		// if list empty
-		System.out.println("in render");
+		//System.out.println("in render");
 		if (firstObj == null) {// list empty
 			// do nothing
 			return false;
@@ -211,14 +212,14 @@ private boolean isJammed;
 		return true;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
+
 
 	// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

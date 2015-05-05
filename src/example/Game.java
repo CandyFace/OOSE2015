@@ -18,7 +18,7 @@ public class Game extends BasicGameState {
 
     Player playerObject = new Player();
     Asteroids[] asteroids = new Asteroids[10];
-    public Asteroids asteroid;
+  //public Asteroids asteroid;
 	public Projectile projectile;
     private int gameId;
 
@@ -36,7 +36,7 @@ public class Game extends BasicGameState {
     @Override
     public void init(GameContainer gc, StateBasedGame game) throws SlickException {
         this.game = game;
-        asteroid = new Asteroids(2f, 5f);
+        //asteroid = new Asteroids(2f, 5f);
         for(int i = 0; i < asteroids.length; i++){
 			asteroids[i] = new Asteroids(2f, i);
         }
@@ -69,14 +69,14 @@ public class Game extends BasicGameState {
     @Override
     public void update(GameContainer gc, StateBasedGame game, int delta) throws SlickException {
         playerObject.update(playerObject.playerSprite);
-        asteroid.update(asteroid.asteroidSprite);
+        //asteroid.update(asteroid.asteroidSprite);
         projectile.update(playerObject.getPosition(), playerObject.getRotation());
 
         startupAnimation.update(delta);
 
         if(!Menu.paused) {
             playerObject.update(); // Call update method from Player class
-            asteroid.update();
+           // asteroid.update();
             for(int i = 0; i < asteroids.length; i++){
                 asteroids[i].update(asteroids[i].asteroidSprite);
                 }
@@ -90,7 +90,8 @@ public class Game extends BasicGameState {
     {
         startupAnimation.draw(100,100);
         playerObject.render(playerObject.playerSprite);
-        asteroid.render(asteroid.asteroidSprite);
+      //  asteroid.render(asteroid.asteroidSprite);
+
         for(int i = 0; i < asteroids.length; i++){
 
             asteroids[i].render(asteroids[i].asteroidSprite);

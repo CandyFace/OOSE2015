@@ -12,6 +12,9 @@ public class Player extends Init{
     private boolean keyPressed = false;
     private boolean leftPressed = false;
 
+    public Animation startupAnimation;
+    public SpriteSheet shipSS;
+
 	public Input input;
 	/**
 	 *
@@ -27,7 +30,8 @@ public class Player extends Init{
         tileset = new Image("graphics/spaceShipSheet.png");
 		playerSprite = tileset.getSubImage(0, 0, 64, 64);
 		playerSprite.setCenterOfRotation(playerSprite.getWidth() * scale / 2, playerSprite.getHeight() * scale / 2); //Set the origin of the player sprite
-    }
+
+	}
 
     public void scoreCounter()
     {

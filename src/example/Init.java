@@ -23,7 +23,9 @@ public class Init {
     int score = 0;
     Image playerSprite;
     Image tileset;
-	
+
+    Animation shipSS;
+
 	void wrapper(Image sprite){
 	//Screen wrap
 	if(position.y < 0-(sprite.getHeight()*scale)) position.y = Main.HEIGHT;
@@ -41,6 +43,7 @@ public class Init {
 	 * Used for variables which are to be used for updating
 	 */
     void update(Image sprite){
+
         sprite.rotate(_rotationSpeed); //updates the rotation speed
     }
 
