@@ -1,6 +1,8 @@
 package example;
 
 
+import javax.swing.JOptionPane;
+
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -35,7 +37,6 @@ public class Game extends BasicGameState {
     @Override
     public void init(GameContainer gc, StateBasedGame game) throws SlickException {
         this.game = game;
-        asteroid = new Asteroids(2f, 5f);
         for(int i = 0; i < asteroids.length; i++){
 			asteroids[i] = new Asteroids(2f, i);
         }
@@ -54,13 +55,12 @@ public class Game extends BasicGameState {
 
         //System.out.println(time);
         playerObject.update(playerObject.playerSprite);
-        asteroid.update(asteroid.asteroidSprite);
         projectile.update(playerObject.getPosition(), playerObject.getRotation());
         if(!Menu.paused) {
             playerObject.update(); // Call update method from Player class
-            asteroid.update();
             for(int i = 0; i < asteroids.length; i++){
                 asteroids[i].update(asteroids[i].asteroidSprite);
+                asteroids[i].update();
                 }
         }
         else
@@ -72,7 +72,6 @@ public class Game extends BasicGameState {
     {
 
         playerObject.render(playerObject.playerSprite);
-        asteroid.render(asteroid.asteroidSprite);
         for(int i = 0; i < asteroids.length; i++){
 
             asteroids[i].render(asteroids[i].asteroidSprite);
@@ -80,7 +79,7 @@ public class Game extends BasicGameState {
 
           if (asteroids[i].getCollisionBox(asteroids[i].asteroidSprite,10,10,-20,-20).intersects(playerObject.getCollisionBox(playerObject.playerSprite,5,5,-25,-25)))
           {
-          System.out.println("COLLISION");
+          //System.out.println("COLLISION");
           }
           g.drawRect(asteroids[i].position.x+10, asteroids[i].position.y+10, asteroids[i].asteroidSprite.getWidth()-20, asteroids[i].asteroidSprite.getHeight()-20);
           g.drawRect(playerObject.position.x+5, playerObject.position.y+5, playerObject.playerSprite.getWidth()-25, playerObject.playerSprite.getHeight()-25);
