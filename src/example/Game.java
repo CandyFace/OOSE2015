@@ -127,7 +127,9 @@ public class Game extends BasicGameState {
 
             if(init.showDebugger) {
                 g.drawRect(asteroids[i].position.x + 10, asteroids[i].position.y + 10, asteroids[i].asteroidSprite.getWidth() - 20, asteroids[i].asteroidSprite.getHeight() - 20);
-                g.drawRect(playerObject.position.x + 5, playerObject.position.y + 5, playerObject.playerSprite.getWidth() - 25, playerObject.playerSprite.getHeight() - 25);
+
+                if(playerObject.playerLife != 0) //Stop drawing the rectangle when player is dead
+                    g.drawRect(playerObject.position.x + 5, playerObject.position.y + 5, playerObject.playerSprite.getWidth() - 25, playerObject.playerSprite.getHeight() - 25);
             }
           }
 
@@ -145,10 +147,10 @@ public class Game extends BasicGameState {
         if(playerObject.playerLife > 0)
         {
             if( init.noDMGTimer == 2.99) {
-                playerObject.playerLife -= 1;
-                System.out.println("player has taken a hit");
+                playerObject.playerLife -= 1; //removes one life from player
+                //System.out.println("player has taken a hit");
             }
-            System.out.println("Cooldown: " + init.noDMGTimer);
+            //System.out.println("Cooldown: " + init.noDMGTimer);
         }
 
         if(playerObject.playerLife <= 3 && init.noDMGTimer <= 0)

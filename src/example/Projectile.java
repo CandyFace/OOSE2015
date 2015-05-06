@@ -25,15 +25,13 @@ public class Projectile {
 	// current(for collision detection)
 	private ProjectileObj currentObj;
 	private Image projectileSprite;
-private int maxProjectile;
-	
+    private int maxProjectile;
 	public Input input;
-
 	private int projectileCount;
-private long msCount;
-private int msDist;
-private long lastMs;
-private boolean isJammed;
+    private long msCount;
+    private int msDist;
+    private long lastMs;
+    private boolean isJammed;
 	
 	
 	// //
@@ -87,8 +85,8 @@ private boolean isJammed;
 	// creating projectileObj, need player position!
 	/**
 	 * 
-	 * @param playerPos
-	 * @param playerRotation
+	 * @param playerPos player position
+	 * @param playerRotation player rotation
 	 * @return count
 	 */
 	public int update(Vector2f playerPos, float playerRotation) {// move
@@ -238,7 +236,7 @@ private boolean isJammed;
 		private ProjectileObj nextObj;
 		private ProjectileObj prevObj;
 		// public
-private int timer;
+        private int timer;
 		protected Vector2f position, displacement;
 		protected float scale;
 		protected float rotation;// rotation is always zero unless a or d is
@@ -278,7 +276,7 @@ private int timer;
 		// ///////// methods /////////////
 		/**
 		 * 
-		 * @param playerPos
+		 * @param playerPos takes the player position
 		 */
 		public void setPos(Vector2f playerPos) {
 			float speed = 5;
@@ -300,7 +298,7 @@ private int timer;
 		
 		/**
 		 * 
-		 * @param playerRotation
+		 * @param playerRotation takes the player rotation
 		 */
 		public void setRotation(float playerRotation) {
 			rotation = playerRotation;// only set when created
@@ -337,7 +335,7 @@ private int timer;
 		}
 
 		public void update() {// moves projectiles
-//check if timer has run out.... 
+        //check if timer has run out....
 			
 			
 			wrapper(projectileSprite);
@@ -358,7 +356,7 @@ private int timer;
 
 		/**
 		 * 
-		 * @param sprite
+		 * @param sprite the image which the wrapper should use
 		 */
 		void wrapper(Image sprite) {
 			// Screen wrap
@@ -375,7 +373,7 @@ private int timer;
 
 		/**
          * @param sprite the image which should be rendered
-		 * @return the variables which are to be used for rendering
+		 * the variables which are to be used for rendering
 		 */
 		void render(Image sprite) {
 

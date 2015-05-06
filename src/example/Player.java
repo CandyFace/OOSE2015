@@ -11,10 +11,8 @@ public class Player extends Init{
 
     private boolean keyPressed = false;
     private boolean leftPressed = false;
-
     public int playerLife = 3; //How much life should the player start with?
-
-	public Input input;
+	protected Input input;
 
     //public AnimationSystem aniSys = new AnimationSystem();
 	/**
@@ -37,31 +35,32 @@ public class Player extends Init{
     public void scoreCounter()
     {
         //TODO implement an actual score system
-        //The player should only gain 50 points when an asteroid has been destroyed.
-        //Less points could be given when only partly destroyed aka. splitted.
-        if (input.isKeyPressed(Input.KEY_E))
-        {
-            score += 50;
-        }
+        //The player should get 5 points for surviving
+        //The timer should not count when in protection mode.
+//        if (input.isKeyPressed(Input.KEY_E))
+//        {
+//            score += 50;
+//        }
     }
 
 
-	/**
-	 * @return void
-	 * used for updating everything in Player class
-	 */
+    /**
+     * @return playerSprite.getRotation()
+     */
 	public float getRotation(){
 		return playerSprite.getRotation();
 		
 	}
-	
+
+    /**
+     * used for updating InputControls and scoreCounter in Player class
+     */
 	public void update(){
         InputControls();
         scoreCounter();
 	}
 	
 	/**
-	 * @return void
 	 * Controls key inputs for playerMovement
 	 */
 	private void playerMovement() {
@@ -84,14 +83,15 @@ public class Player extends Init{
 
 		position.x += displacement.x;
 		position.y += displacement.y;
-		
+
 		displacement.x *= friction;
         displacement.y *= friction;
 
         //Speed of ship
         //System.out.println("Acceleration: " +calAcceleration(displacement.x,displacement.y)* 10);
 
-	}
+	    }// end of if
+
         if(!keyPressed){
         	speed-= accel * delta;
 			
@@ -107,18 +107,17 @@ public class Player extends Init{
 
 	        //Speed of ship
 	       //System.out.println("Acceleration: " +calAcceleration(displacement.x,displacement.y)* 10);
-	}
+	    }
 
-	if(leftPressed){
-		//Set player rotation
-		_rotationSpeed = rotationSpeed;
-	}
-	else { // right
-		_rotationSpeed = -rotationSpeed;
-	}
+	    if(leftPressed){
+	    	//Set player rotation
+	    	_rotationSpeed = rotationSpeed;
+	    }
+	    else { // right
+	    	_rotationSpeed = -rotationSpeed;
+	    }
 
-	
-	}
+    }//End of playerMovement method
 
     void wrapper(Image sprite){
         //Screen wrap
@@ -151,6 +150,5 @@ public class Player extends Init{
             leftPressed = false;
         }
         else _rotationSpeed = 0; //player stops rotating when nothing is pressed.
-
     }
 }
