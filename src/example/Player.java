@@ -71,8 +71,8 @@ public class Player extends Init{
 		displacement.x += (float) Math.cos(Math.toRadians(direction-90))* speed * delta;
 	    displacement.y += (float) Math.sin(Math.toRadians(direction-90))* speed * delta;
 
-	    System.out.println(speed);
-	    System.out.println(maxSpeed);
+	    //System.out.println(speed);
+	    //System.out.println(maxSpeed);
 
 		if(speed >= maxSpeed){
 			speed = maxSpeed;
@@ -85,7 +85,7 @@ public class Player extends Init{
         displacement.y *= friction;
 
         //Speed of ship
-        System.out.println("Acceleration: " +calAcceleration(displacement.x,displacement.y)* 10);
+        //System.out.println("Acceleration: " +calAcceleration(displacement.x,displacement.y)* 10);
 
 	}
         if(!keyPressed){
@@ -102,7 +102,7 @@ public class Player extends Init{
 	        displacement.y *= friction;
 	        
 	        //Speed of ship
-	       System.out.println("Acceleration: " +calAcceleration(displacement.x,displacement.y)* 10);
+	       //System.out.println("Acceleration: " +calAcceleration(displacement.x,displacement.y)* 10);
 	}
 
 	if(leftPressed){
