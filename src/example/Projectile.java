@@ -61,12 +61,20 @@ private boolean isJammed;
 
 	// ///////////////////////////////////////////////////////////////
 	// /////////////////// methods ///////////////////////////////////////////
+	/**
+	 * 
+	 * @return pos
+	 */
 	public Vector2f getPosition() {// position of current obj
 
 		return currentObj.pos;
 	}
 
 	// ///// collision detection //////////////
+	/**
+	 * 
+	 * @return state
+	 */
 	public boolean next() {// sets current to next in list
 		boolean state = true;
 
@@ -77,6 +85,12 @@ private boolean isJammed;
 
 	// /////////////////////////////////////
 	// creating projectileObj, need player position!
+	/**
+	 * 
+	 * @param playerPos
+	 * @param playerRotation
+	 * @return count
+	 */
 	public int update(Vector2f playerPos, float playerRotation) {// move
 																	// pressed!
 		// 2 parts, create new bullets, update old bullets, new bullets based on
@@ -214,14 +228,6 @@ private boolean isJammed;
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-
 	// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -243,6 +249,10 @@ private int timer;
 		protected float speed;
 
 		// constructors ///
+		/**
+		 * 
+		 * @param nextObj
+		 */
 		public ProjectileObj(ProjectileObj nextObj) {
 			this.nextObj = nextObj;
 
@@ -266,6 +276,10 @@ private int timer;
 		}
 
 		// ///////// methods /////////////
+		/**
+		 * 
+		 * @param playerPos
+		 */
 		public void setPos(Vector2f playerPos) {
 			float speed = 5;
 			float delta = 2;
@@ -283,21 +297,41 @@ private int timer;
 			position.y = playerPos.y;
 
 		}
-
+		
+		/**
+		 * 
+		 * @param playerRotation
+		 */
 		public void setRotation(float playerRotation) {
 			rotation = playerRotation;// only set when created
 		}
 
+		/**
+		 * 
+		 * @return nextObj
+		 */
 		public ProjectileObj getNext() {
 			return nextObj;
 
 		}
+		/**
+		 * 
+		 * @return prevObj
+		 */
 		public ProjectileObj getPrev(){
 			return prevObj;
 		}
+		/**
+		 * 
+		 * @param prevObj
+		 */
 		public void setPrev(ProjectileObj prevObj){
 			this.prevObj = prevObj;
 		}
+		/**
+		 * 
+		 * @param nextObj
+		 */
 		public void setNext(ProjectileObj nextObj){
 			this.nextObj = nextObj;
 		}
@@ -322,7 +356,10 @@ private int timer;
 		timer++;
 		}
 
-
+		/**
+		 * 
+		 * @param sprite
+		 */
 		void wrapper(Image sprite) {
 			// Screen wrap
 			if (position.y < 0 - (sprite.getHeight() * scale))
