@@ -2,8 +2,6 @@ package example;
 
 import java.util.Random;
 
-import javax.swing.JOptionPane;
-
 import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -67,4 +65,12 @@ public class Asteroids extends Init {
         
         wrapper(asteroidSprite);
 	}
+
+    void wrapper(Image sprite){
+        //Screen wrap
+        if(position.y < 0-(sprite.getHeight()*scale)) position.y = Main.HEIGHT;
+        if(position.y > Main.HEIGHT) position.y = 0-(sprite.getHeight()*scale);
+        if(position.x < 0-(sprite.getWidth()*scale)) position.x = Main.WIDTH;
+        if(position.x > Main.WIDTH) position.x = 0-(sprite.getWidth()*scale);
+    }
 }

@@ -18,26 +18,21 @@ public class Init {
     float direction = 0;
     int maxSpeed = 10;
     float accel = 0.5f;
-    float delta = 0.033f;
+    float delta = 0.033f; // this is not actual delta...
     float friction = 0.98f;
     int score = 0;
     Image playerSprite;
     Image tileset;
+    double noDMGTimer = 3.00; //The timer which makes the player untouchable for x amount of time
+    boolean isPlayerHit = false;
+    boolean showDebugger = false;
 
-    Animation shipSS;
+    //Animation shipSS;
 
-	void wrapper(Image sprite){
-	//Screen wrap
-	if(position.y < 0-(sprite.getHeight()*scale)) position.y = Main.HEIGHT;
-	if(position.y > Main.HEIGHT) position.y = 0-(sprite.getHeight()*scale);
-	if(position.x < 0-(sprite.getWidth()*scale)) position.x = Main.WIDTH;
-	if(position.x > Main.WIDTH) position.x = 0-(sprite.getWidth()*scale);
-	}
-	
 	Rectangle getCollisionBox(Image sprite, int offsetX, int offsetY, int offsetWidth, int offsetHeight) {
 		return new Rectangle((int)position.x+offsetX, (int)position.y+offsetY, sprite.getWidth()+offsetWidth, sprite.getHeight()+offsetHeight);
 	}
-	
+
 	/**
 	 *@param sprite
 	 * Used for variables which are to be used for updating
@@ -51,9 +46,9 @@ public class Init {
      *@param sprite
      * Used for variables which are to be used for rendering
      */
-	void render(Image sprite){
+	void render(Image sprite) {
 
-		sprite.draw(position.x,position.y,scale); // draws player sprite
+            sprite.draw(position.x, position.y, scale); // draws player sprite
 	}
 
 
