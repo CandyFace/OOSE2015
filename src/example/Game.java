@@ -31,6 +31,17 @@ public class Game extends BasicGameState {
         this.gameId = gameId;
     }
 
+    public void enter(GameContainer gc, StateBasedGame game) throws SlickException{
+        if(Init.gameOver) {
+            init.init(); //Runs through init void in Init class
+            playerObject.init(); //Call init method from Player class
+            init(gc, game);
+            // Setup your game starting points here
+        }else {
+
+        }
+    }
+
     @Override
     public void init(GameContainer gc, StateBasedGame game) throws SlickException {
         this.game = game;
@@ -93,7 +104,10 @@ public class Game extends BasicGameState {
         public void render (GameContainer gc, StateBasedGame game, Graphics g)throws SlickException {
             if (playerObject.playerLife <= 0) {
                 //stop drawing player
+                Init.gameOver = true;
+                Menu.paused = false;
                 game.enterState(Main.over);
+
 
             } else if (playerObject.playerLife > 0) {
                 //Continue and check for hit

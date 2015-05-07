@@ -4,14 +4,12 @@ import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.Animation;
-import org.newdawn.slick.SpriteSheet;
 
 public class Player extends Init{
 
     private boolean keyPressed = false;
     private boolean leftPressed = false;
-    public int playerLife = 3; //How much life should the player start with?
+    public int playerLife;
 	protected Input input;
 
 	/**
@@ -24,11 +22,15 @@ public class Player extends Init{
     {
 		position = new Vector2f();
 		displacement = new Vector2f();
-		scale = 0.8f;
-        tileset = new Image("SpaceshipSheet.png");
-		playerSprite = tileset.getSubImage(0, 0, 64, 64);
+		scale = 0.8f; //The image is 0.x smaller or 1.x larger than origin.
+        tileset = new Image("SpaceshipSheet.png"); // The spritesheet
+		playerSprite = tileset.getSubImage(0, 0, 64, 64); // the player sprite, taken from a part of the spritesheet
+        playerLife = 3; //How much life should the player start with?
 
         playerSprite.setCenterOfRotation(playerSprite.getWidth() * scale / 2, playerSprite.getHeight() * scale / 2); //Set the origin of the player sprite
+
+        position.x = 300; // Player spawn position on x
+        position.y = 200; // Player spawn position on y
     }
 
     /**
