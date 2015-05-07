@@ -110,6 +110,7 @@ public class Game extends BasicGameState {
 
         if (playerObject.playerLife <= 0) {
             //stop drawing player
+            game.enterState(Main.over);
 
         } else if(playerObject.playerLife > 0) {
             //Continue and check for hit

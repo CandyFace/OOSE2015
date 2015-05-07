@@ -12,6 +12,7 @@ public class Main extends StateBasedGame
 {
     public static final int menu = 1;
     public static final int game = 2;
+    public static final int over = 4;
     public static final int highScore = 3;
 
 	static int WIDTH = 640;
@@ -21,6 +22,7 @@ public class Main extends StateBasedGame
         super(name);
         addState(new Menu(menu));
         addState(new Game(game));
+        addState(new GameOver(over));
         enterState(menu);
     }
 
@@ -35,7 +37,7 @@ public class Main extends StateBasedGame
 		try
 		{
 			AppGameContainer appgc;
-			appgc = new AppGameContainer(new Main("Simple Slick Game"));
+			appgc = new AppGameContainer(new Main("AvoidAsteroid"));
 			appgc.setDisplayMode(WIDTH, HEIGHT, false);
 			appgc.setTargetFrameRate(60);
 			appgc.start();
