@@ -4,15 +4,19 @@ import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Animation;
+import org.newdawn.slick.SpriteSheet;
 
 public class Player extends Init{
 
     private boolean keyPressed = false;
     private boolean leftPressed = false;
 
+    public int playerLife = 3; //How much life should the player start with?
+
 	public Input input;
 
-
+    //public AnimationSystem aniSys = new AnimationSystem();
 	/**
 	 *
 	 * @throws SlickException
@@ -20,16 +24,21 @@ public class Player extends Init{
 	 * Used to initialize all variables for usage in player class
 	 */
 	public void init() throws SlickException
-	{
+    {
 		position = new Vector2f();
 		displacement = new Vector2f();
 		scale = 0.8f;
-		playerSprite = new Image("graphics/Spaceship.gif");
-		playerSprite.setCenterOfRotation(playerSprite.getWidth() * scale / 2, playerSprite.getHeight() * scale / 2); //Set the origin of the player sprite
-	}
+        tileset = new Image("graphics/spaceShipSheet.png");
+		playerSprite = tileset.getSubImage(0, 0, 64, 64);
 
-    public void highScoreCounter()
+        playerSprite.setCenterOfRotation(playerSprite.getWidth() * scale / 2, playerSprite.getHeight() * scale / 2); //Set the origin of the player sprite
+    }
+
+    public void scoreCounter()
     {
+        //TODO implement an actual score system
+        //The player should only gain 50 points when an asteroid has been destroyed.
+        //Less points could be given when only partly destroyed aka. splitted.
         if (input.isKeyPressed(Input.KEY_E))
         {
             score += 50;
@@ -48,13 +57,8 @@ public class Player extends Init{
 	
 	public void update(){
         InputControls();
-        highScoreCounter();
+        scoreCounter();
 	}
-	
-	/**
-	 * @return void
-	 * Used for rendering all resources in Player class
-	 */
 	
 	/**
 	 * @return void
@@ -100,7 +104,7 @@ public class Player extends Init{
 			
 			displacement.x *= friction;
 	        displacement.y *= friction;
-	        
+
 	        //Speed of ship
 	       //System.out.println("Acceleration: " +calAcceleration(displacement.x,displacement.y)* 10);
 	}
@@ -115,6 +119,14 @@ public class Player extends Init{
 
 	
 	}
+
+    void wrapper(Image sprite){
+        //Screen wrap
+        if(position.y < 0-(sprite.getHeight()*scale)) position.y = Main.HEIGHT;
+        if(position.y > Main.HEIGHT) position.y = 0-(sprite.getHeight()*scale);
+        if(position.x < 0-(sprite.getWidth()*scale)) position.x = Main.WIDTH;
+        if(position.x > Main.WIDTH) position.x = 0-(sprite.getWidth()*scale);
+    }
 	
 	private double calAcceleration(double a, double b)
 	{
@@ -124,20 +136,21 @@ public class Player extends Init{
     private void InputControls()
     {
         playerMovement();
-        if(input.isKeyDown(Input.KEY_UP)) {
+        if(input.isKeyDown(Input.KEY_UP) && playerLife >0) {
             keyPressed = true;
         }
         if(!input.isKeyDown(Input.KEY_UP)) {
             keyPressed = false;
         }
-        if(input.isKeyDown(Input.KEY_RIGHT))
+        if(input.isKeyDown(Input.KEY_RIGHT) && playerLife >0)
         {
             leftPressed = true;
         }
-        else if(input.isKeyDown(Input.KEY_LEFT))
+        else if(input.isKeyDown(Input.KEY_LEFT) && playerLife >0)
         {
             leftPressed = false;
         }
-        else _rotationSpeed = 0;
+        else _rotationSpeed = 0; //player stops rotating when nothing is pressed.
+
     }
 }

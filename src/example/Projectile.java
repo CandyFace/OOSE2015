@@ -1,8 +1,10 @@
 package example;
 
 import java.awt.Rectangle;
+
 import java.util.ArrayList;
 import java.util.Random;
+
 
 import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.Image;
@@ -61,12 +63,20 @@ private boolean isJammed;
 
 	// ///////////////////////////////////////////////////////////////
 	// /////////////////// methods ///////////////////////////////////////////
+	/**
+	 * 
+	 * @return pos
+	 */
 	public Vector2f getPosition() {// position of current obj
 
 		return currentObj.pos;
 	}
 
 	// ///// collision detection //////////////
+	/**
+	 * 
+	 * @return state
+	 */
 	public boolean next() {// sets current to next in list
 		boolean state = true;
 
@@ -77,7 +87,10 @@ private boolean isJammed;
 
 	// /////////////////////////////////////
 	// creating projectileObj, need player position!
+
+
 	public int update(Vector2f playerPos, float playerRotation) throws SlickException {// move
+
 																	// pressed!
 		// 2 parts, create new bullets, update old bullets, new bullets based on
 		// player position!!!
@@ -109,12 +122,12 @@ private boolean isJammed;
 		// if list empty
 
 		// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+        
 		//System.out.println("inside projectile update 3");
 		// ///////////// counting projectiles ////////////////////
 		//System.out.println("number of projectiles in list: "
 				//+ projectileCount());
-
+        
 		count++;
 		return count;
 	}
@@ -235,14 +248,6 @@ private boolean isJammed;
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
 
 
-	
 }
