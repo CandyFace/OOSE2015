@@ -1,6 +1,8 @@
 package example;
 
 
+import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
 
 import org.newdawn.slick.*;
@@ -24,6 +26,9 @@ public class Game extends BasicGameState {
 	public Projectile projectile;
     private int gameId;
 
+    private int pointCount; 
+    
+    
 
     /**
      * @param gameId
@@ -37,6 +42,9 @@ public class Game extends BasicGameState {
     @Override
     public void init(GameContainer gc, StateBasedGame game) throws SlickException {
         this.game = game;
+        
+        pointCount = 0;
+        
         for(int i = 0; i < asteroids.length; i++){
 			asteroids[i] = new Asteroids(2f, i);
         }
@@ -58,14 +66,77 @@ public class Game extends BasicGameState {
         projectile.update(playerObject.getPosition(), playerObject.getRotation());
         if(!Menu.paused) {
             playerObject.update(); // Call update method from Player class
-            for(int i = 0; i < asteroids.length; i++){
+    
+            
+            
+            
+  
+            for(int i = 0; i < asteroids.length; i++){//collision detection and moving asteroids
                 asteroids[i].update(asteroids[i].asteroidSprite);
                 asteroids[i].update();
+                
+         
+                //player collision
+                if (asteroids[i].getCollisionBox(asteroids[i].asteroidSprite,10,10,-20,-20).intersects(playerObject.getCollisionBox(playerObject.playerSprite,5,5,-25,-25)))
+                {
+            //    System.out.println("COLLISION");
                 }
+            //projectile collision, link through projectiles, get projectile list size...
+           
+             
+            //ArrayList<Integer> removeProjectileList = new ArrayList<Integer>();
+                
+                
+                ProjectileObj[] projectileObjList = projectile.getProjectileObjList();
+                int numProjectiles = projectile.projectileCount();
+                for(int j = 0;j< numProjectiles;j++){
+                	
+                //	System.out.println("projectiles in linked list : "+ projectile.projectileCount());
+                  // System.out.println("projectiles in array : "+ projectileObjList.length);
+                   
+                    if(asteroids[i].getCollisionBox(asteroids[i].asteroidSprite,10,10,-20,-20).intersects(projectileObjList[j].getCollisionBox(projectileObjList[j].projectileSprite,5,5,-25,-25))){
+                    	pointCount++;                	
+                    	System.out.println("You hit an ASTEROID!!!!! point : "+pointCount);
+//making list of projectiles to remove
+                	//removeProjectileList.add(0, j);
+                    	
+                    	if(numProjectiles == 1){//case of one projectile
+                    	//	System.out.println("assteroid");
+                    		
+                    		projectile.firstObj = null;//kill that projectile
+                    		
+                    	}
+                    	
+                    	/*
+                    	else if(projectileObjList[j].getNext() != null && projectileObjList[j].getPrev() == null)//projectile is first in list
+                    	{
+                    		System.out.println("assteroid!!");
+                    		projectileObjList[j].getNext().setPrev(null);
+                    		
+                    	}
+                    	
+                  else if(projectileObjList[j].getNext() != null && projectileObjList[j].getPrev() != null){ //projectile is in middle of list
+                	  projectileObjList[j].getPrev().setNext(projectileObjList[j].getNext());
+                	  projectileObjList[j].getNext().setPrev(projectileObjList[j].getPrev());
+                  }
+                     	else projectileObjList[j].getPrev().setNext(null);// projectile is last in list
+                    
+                    	    */
+                    }
+                
+               
+            
+                }
+            }
         }
         else
             Menu.paused = false;
     }
+    
+    
+    
+    
+    
 
     @Override
     public void render(GameContainer gc, StateBasedGame game, Graphics g) throws SlickException
@@ -77,10 +148,7 @@ public class Game extends BasicGameState {
             asteroids[i].render(asteroids[i].asteroidSprite);
           //Collision detection
 
-          if (asteroids[i].getCollisionBox(asteroids[i].asteroidSprite,10,10,-20,-20).intersects(playerObject.getCollisionBox(playerObject.playerSprite,5,5,-25,-25)))
-          {
-          //System.out.println("COLLISION");
-          }
+         
           g.drawRect(asteroids[i].position.x+10, asteroids[i].position.y+10, asteroids[i].asteroidSprite.getWidth()-20, asteroids[i].asteroidSprite.getHeight()-20);
           g.drawRect(playerObject.position.x+5, playerObject.position.y+5, playerObject.playerSprite.getWidth()-25, playerObject.playerSprite.getHeight()-25);
           }
