@@ -95,6 +95,7 @@ public class Game extends BasicGameState {
                     //System.out.println("COLLISION");
                     init.isPlayerHit = true;
                     asteroids[i].destroyed = true;
+                    asteroids[i] = new Asteroids(2f, i);
                 }
             }
         }
