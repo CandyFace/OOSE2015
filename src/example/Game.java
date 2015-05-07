@@ -24,6 +24,7 @@ public class Game extends BasicGameState {
 	public Projectile projectile;
     private int gameId;
 
+
  //   public Animation startupAnimation;
  //   public SpriteSheet shipSS;
 
@@ -40,6 +41,7 @@ public class Game extends BasicGameState {
         this.game = game;
         for(int i = 0; i < asteroids.length; i++){
 			asteroids[i] = new Asteroids(2f, i);
+
         }
 
         //aniSys.init(); //Call init method from AnimationSystem class
@@ -111,9 +113,11 @@ public class Game extends BasicGameState {
 
             if(init.isPlayerHit)
             {
+
                 playerIsDMG(); //if hit, run through playerISDMG void
 
             }// else render playerSprite
+
 
             playerObject.render(playerObject.playerSprite);
 

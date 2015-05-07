@@ -127,10 +127,10 @@ public class Player extends Init{
         if(position.x > Main.WIDTH) position.x = 0-(sprite.getWidth()*scale);
     }
 	
-	private double calAcceleration(double a, double b)
-	{
-		return Math.sqrt(Math.pow(a,2) + Math.pow(b,2));
-	}
+//	private double calAcceleration(double a, double b)
+//	{
+//		return Math.sqrt(Math.pow(a,2) + Math.pow(b,2));
+//	}
 
     private void InputControls()
     {

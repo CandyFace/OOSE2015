@@ -23,9 +23,11 @@ public class Init {
     int score = 0;
     Image playerSprite;
     Image tileset;
+
     double noDMGTimer = 3.00; //The timer which makes the player untouchable for x amount of time
     boolean isPlayerHit = false;
     boolean showDebugger = false;
+
 
     //Animation shipSS;
 
