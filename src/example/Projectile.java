@@ -2,6 +2,10 @@ package example;
 
 import java.awt.Rectangle;
 
+import java.util.ArrayList;
+import java.util.Random;
+
+
 import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
@@ -21,19 +25,21 @@ public class Projectile {
 	// variables
 	private int count;
 
-	private ProjectileObj firstObj;// first in list
+	public ProjectileObj firstObj;// first in list
 	// last in list
 	private ProjectileObj lastObj;
 	// current(for collision detection)
 	private ProjectileObj currentObj;
-	private Image projectileSprite;
-    private int maxProjectile;
+	
+private int maxProjectile;
+	
 	public Input input;
+
 	private int projectileCount;
-    private long msCount;
-    private int msDist;
-    private long lastMs;
-    private boolean isJammed;
+private long msCount;
+private int msDist;
+private long lastMs;
+private boolean isJammed;
 	
 	
 	// //
@@ -41,11 +47,7 @@ public class Projectile {
 	// /////////////////////////////////////////////////////////////////////////////////////////
 	// constructor
 	public Projectile() throws SlickException {// initialize, list starts empty!
-		projectileSprite = new Image("graphics/fire.png");
-		float scale = 0.8f;
-
-		projectileSprite.setCenterOfRotation(projectileSprite.getWidth()
-				* scale / 2, projectileSprite.getHeight() * scale / 2); // Set
+	
 		
 		maxProjectile = 5;
 		
@@ -85,13 +87,10 @@ public class Projectile {
 
 	// /////////////////////////////////////
 	// creating projectileObj, need player position!
-	/**
-	 * 
-	 * @param playerPos player position
-	 * @param playerRotation player rotation
-	 * @return count
-	 */
-	public int update(Vector2f playerPos, float playerRotation) {// move
+
+
+	public int update(Vector2f playerPos, float playerRotation) throws SlickException {// move
+
 																	// pressed!
 		// 2 parts, create new bullets, update old bullets, new bullets based on
 		// player position!!!
@@ -133,7 +132,7 @@ public class Projectile {
 		return count;
 	}
 
-	private int projectileCount() {
+	public int projectileCount() {
 		projectileCount = 0;
 		// loop through list
 		if (firstObj != null) {
@@ -150,6 +149,27 @@ public class Projectile {
 
 		return projectileCount;
 	}
+	
+	public ProjectileObj[] getProjectileObjList(){
+		
+		
+		if(projectileCount() != 0){
+		ProjectileObj[] projectileObjList = new ProjectileObj[projectileCount];
+		projectileObjList[0] = firstObj;
+		currentObj = firstObj;
+		for(int i = 0;i<projectileCount-1;i++){
+			projectileObjList[i+1] = currentObj.getNext();  
+			currentObj = currentObj.getNext();
+		}
+		currentObj = firstObj;
+		
+		return projectileObjList;
+		} 
+		return null;
+	}
+	
+	
+
 
 	private void moveProjectiles() {//also checks timer, and maybe delete last projectile
 
@@ -178,7 +198,7 @@ public class Projectile {
 
 	}
 
-	private void createProjectiles(Vector2f playerPos, float playerRotation) {
+	private void createProjectiles(Vector2f playerPos, float playerRotation) throws SlickException {
 		// ///////creating new projectiles!!!/////////////
 		if (input.isKeyPressed(Input.KEY_SPACE) && projectileCount <= maxProjectile && !isJammed) {
 			//System.out.println("Space is pressed");
@@ -218,11 +238,11 @@ public class Projectile {
 
 			ProjectileObj tempObj = firstObj;
 			while (tempObj != lastObj) {
-				tempObj.render(projectileSprite);
+				tempObj.render();
 				tempObj = tempObj.getNext();
 
 			}
-			tempObj.render(projectileSprite);
+			tempObj.render();
 		}
 		return true;
 	}
@@ -238,7 +258,7 @@ public class Projectile {
 		private ProjectileObj nextObj;
 		private ProjectileObj prevObj;
 		// public
-        private int timer;
+private int timer;
 		protected Vector2f position, displacement;
 		protected float scale;
 		protected float rotation;// rotation is always zero unless a or d is
@@ -278,7 +298,7 @@ public class Projectile {
 		// ///////// methods /////////////
 		/**
 		 * 
-		 * @param playerPos takes the player position
+		 * @param playerPos
 		 */
 		public void setPos(Vector2f playerPos) {
 			float speed = 5;
@@ -304,7 +324,7 @@ public class Projectile {
 		
 		/**
 		 * 
-		 * @param playerRotation takes the player rotation
+		 * @param playerRotation
 		 */
 		public void setRotation(float playerRotation) {
 			rotation = playerRotation;// only set when created
@@ -341,7 +361,7 @@ public class Projectile {
 		}
 
 		public void update() {// moves projectiles
-        //check if timer has run out....
+//check if timer has run out.... 
 			
 			
 			wrapper(projectileSprite);
@@ -362,7 +382,7 @@ public class Projectile {
 
 		/**
 		 * 
-		 * @param sprite the image which the wrapper should use
+		 * @param sprite
 		 */
 		void wrapper(Image sprite) {
 			// Screen wrap
@@ -379,7 +399,7 @@ public class Projectile {
 
 		/**
          * @param sprite the image which should be rendered
-		 * the variables which are to be used for rendering
+		 * @return the variables which are to be used for rendering
 		 */
 		void render(Image sprite) {
 

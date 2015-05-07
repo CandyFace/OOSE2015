@@ -1,5 +1,9 @@
 package example;
 
+import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
+
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -27,6 +31,7 @@ public class Game extends BasicGameState {
 
  //   public Animation startupAnimation;
  //   public SpriteSheet shipSS;
+	private int pointCount;
 
     /**
      * @param gameId defines gamestate
@@ -52,6 +57,7 @@ public class Game extends BasicGameState {
     	projectile = new Projectile();
 		projectile.input = gc.getInput(); //Init input class
 
+		pointCount = 0;
 
 //Unused sprite animation
 /*        shipSS = new SpriteSheet("graphics/SpaceshipSheet.png", 64, 64);
@@ -88,6 +94,13 @@ public class Game extends BasicGameState {
             	{
                 asteroids[i].update(asteroids[i].asteroidSprite);
                 asteroids[i].update();
+
+                
+         
+                //player collision
+                if (asteroids[i].getCollisionBox(asteroids[i].asteroidSprite,10,10,-20,-20).intersects(playerObject.getCollisionBox(playerObject.playerSprite,5,5,-25,-25)))
+                {
+            //    System.out.println("COLLISION");
             	}
                 //Collision detection
                 if (asteroids[i].getCollisionBox(asteroids[i].asteroidSprite,10,10,-20,-20).intersects(playerObject.getCollisionBox(playerObject.playerSprite,5,5,-25,-25)))
@@ -97,6 +110,53 @@ public class Game extends BasicGameState {
                     asteroids[i].destroyed = true;
                     asteroids[i] = new Asteroids(2f, i);
                 }
+            //projectile collision, link through projectiles, get projectile list size...
+           
+             
+            //ArrayList<Integer> removeProjectileList = new ArrayList<Integer>();
+                
+                
+                ProjectileObj[] projectileObjList = projectile.getProjectileObjList();
+                int numProjectiles = projectile.projectileCount();
+                for(int j = 0;j< numProjectiles;j++){
+                	
+                //	System.out.println("projectiles in linked list : "+ projectile.projectileCount());
+                  // System.out.println("projectiles in array : "+ projectileObjList.length);
+                   
+                    if(asteroids[i].getCollisionBox(asteroids[i].asteroidSprite,10,10,-20,-20).intersects(projectileObjList[j].getCollisionBox(projectileObjList[j].projectileSprite,5,5,-25,-25))){
+                    	pointCount++;                	
+                    	System.out.println("You hit an ASTEROID!!!!! point : "+pointCount);
+//making list of projectiles to remove
+                	//removeProjectileList.add(0, j);
+                    	
+                    	if(numProjectiles == 1){//case of one projectile
+                    	//	System.out.println("assteroid");
+                    		
+                    		projectile.firstObj = null;//kill that projectile
+                    		
+                    	}
+                    	
+                    	/*
+                    	else if(projectileObjList[j].getNext() != null && projectileObjList[j].getPrev() == null)//projectile is first in list
+                    	{
+                    		System.out.println("assteroid!!");
+                    		projectileObjList[j].getNext().setPrev(null);
+                    		
+                    	}
+                    	
+                  else if(projectileObjList[j].getNext() != null && projectileObjList[j].getPrev() != null){ //projectile is in middle of list
+                	  projectileObjList[j].getPrev().setNext(projectileObjList[j].getNext());
+                	  projectileObjList[j].getNext().setPrev(projectileObjList[j].getPrev());
+                  }
+                     	else projectileObjList[j].getPrev().setNext(null);// projectile is last in list
+                    
+                    	    */
+                    }
+                
+               
+            
+                }
+
             }
         }
         else
@@ -127,11 +187,23 @@ public class Game extends BasicGameState {
 
         }// end of else if statement
 
-        for(int i = 0; i < asteroids.length; i++){
+		for (int i = 0; i < asteroids.length; i++) {
 
-        	if(!asteroids[i].destroyed) asteroids[i].render(asteroids[i].asteroidSprite);
-            projectile.render();
+			if (!asteroids[i].destroyed)
+				asteroids[i].render(asteroids[i].asteroidSprite);
+			projectile.render();
 
+			if (init.showDebugger) {
+				g.drawRect(asteroids[i].position.x + 10,
+						asteroids[i].position.y + 10,
+						asteroids[i].asteroidSprite.getWidth() - 20,
+						asteroids[i].asteroidSprite.getHeight() - 20);
+				g.drawRect(playerObject.position.x + 5,
+						playerObject.position.y + 5,
+						playerObject.playerSprite.getWidth() - 25,
+						playerObject.playerSprite.getHeight() - 25);
+			}
+		}
 
             if(init.showDebugger) {
                 g.drawRect(asteroids[i].position.x + 10, asteroids[i].position.y + 10, asteroids[i].asteroidSprite.getWidth() - 20, asteroids[i].asteroidSprite.getHeight() - 20);
