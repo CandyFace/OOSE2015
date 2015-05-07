@@ -14,7 +14,6 @@ public class Player extends Init{
     public int playerLife = 3; //How much life should the player start with?
 	protected Input input;
 
-    //public AnimationSystem aniSys = new AnimationSystem();
 	/**
 	 *
 	 * @throws SlickException
@@ -26,23 +25,11 @@ public class Player extends Init{
 		position = new Vector2f();
 		displacement = new Vector2f();
 		scale = 0.8f;
-        tileset = new Image("graphics/spaceShipSheet.png");
+        tileset = new Image("SpaceShipSheet.png");
 		playerSprite = tileset.getSubImage(0, 0, 64, 64);
 
         playerSprite.setCenterOfRotation(playerSprite.getWidth() * scale / 2, playerSprite.getHeight() * scale / 2); //Set the origin of the player sprite
     }
-
-    public void scoreCounter()
-    {
-        //TODO implement an actual score system
-        //The player should get 5 points for surviving
-        //The timer should not count when in protection mode.
-//        if (input.isKeyPressed(Input.KEY_E))
-//        {
-//            score += 50;
-//        }
-    }
-
 
     /**
      * @return playerSprite.getRotation()
@@ -56,8 +43,7 @@ public class Player extends Init{
      * used for updating InputControls and scoreCounter in Player class
      */
 	public void update(){
-        InputControls();
-        scoreCounter();
+        InputControls(); //Always update inputControls
 	}
 	
 	/**
@@ -107,14 +93,15 @@ public class Player extends Init{
 
 	        //Speed of ship
 	       //System.out.println("Acceleration: " +calAcceleration(displacement.x,displacement.y)* 10);
-	    }
+	    }// end of if
 
 	    if(leftPressed){
 	    	//Set player rotation
-	    	_rotationSpeed = rotationSpeed;
+	    	_rotationSpeed = getRotationSpeed();
 	    }
 	    else { // right
-	    	_rotationSpeed = -rotationSpeed;
+
+            _rotationSpeed = -getRotationSpeed();
 	    }
 
     }//End of playerMovement method

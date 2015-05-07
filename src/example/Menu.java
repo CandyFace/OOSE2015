@@ -16,7 +16,7 @@ public class Menu extends BasicGameState {
     private StateBasedGame game;
     static boolean paused = false;
     private int gameId;
-    private boolean pressedESC = false;
+    public static boolean pressedESC = false;
 
     public Menu(int gameId) {
         this.gameId = gameId;
@@ -41,14 +41,14 @@ public class Menu extends BasicGameState {
         {
             g.drawString("GAME PAUSED", Main.WIDTH / 2.5f, (Main.HEIGHT - 60) / 2.5f);
             g.drawString("1. Continue", Main.WIDTH / 2.5f, Main.HEIGHT / 2.5f);
-            g.drawString("2. High Scores", Main.WIDTH / 2.5f, (Main.HEIGHT + 60) / 2.5f);
+            //g.drawString("2. High Scores", Main.WIDTH / 2.5f, (Main.HEIGHT + 60) / 2.5f);
             g.drawString("ESC. Quit", Main.WIDTH / 2.5f, (Main.HEIGHT + 120) / 2.5f);
         }
         else{
             g.drawString("GAME MENU", Main.WIDTH / 2.5f, (Main.HEIGHT - 60) / 2.5f);
 
             g.drawString("1. Play Game", Main.WIDTH / 2.5f, Main.HEIGHT / 2.5f);
-            g.drawString("2. High Scores", Main.WIDTH / 2.5f, (Main.HEIGHT + 60) / 2.5f);
+            //g.drawString("2. High Scores", Main.WIDTH / 2.5f, (Main.HEIGHT + 60) / 2.5f);
             g.drawString("ESC. Quit", Main.WIDTH / 2.5f, (Main.HEIGHT + 120) / 2.5f);
         }
 

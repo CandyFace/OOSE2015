@@ -17,14 +17,11 @@ import org.newdawn.slick.state.StateBasedGame;
 public class Game extends BasicGameState {
 
     private StateBasedGame game;
-
     private Init init = new Init();
-
     Player playerObject = new Player();
     Asteroids[] asteroids = new Asteroids[10];
 	public Projectile projectile;
     private int gameId;
-
 	public static int pointCount;
 
     /**
@@ -32,7 +29,6 @@ public class Game extends BasicGameState {
      */
     public Game(int gameId) {
         this.gameId = gameId;
-
     }
 
     @Override
@@ -46,7 +42,7 @@ public class Game extends BasicGameState {
         playerObject.input = gc.getInput(); //Init input class
     	projectile = new Projectile();
 		projectile.input = gc.getInput(); //Init input class
-		pointCount = 0;
+		pointCount = 0; //Counts point whenever a projectile hits or flies through
     }
 
     @Override
@@ -75,7 +71,7 @@ public class Game extends BasicGameState {
 
                         if (asteroids[i].getCollisionBox(asteroids[i].asteroidSprite, 10, 10, -20, -20).intersects(projectileObjList[j].getCollisionBox(projectileObjList[j].projectileSprite, 5, 5, -25, -25))) {
                             pointCount++;
-                            System.out.println("You hit an ASTEROID!!!!! point : " + pointCount);
+                            //System.out.println("You hit an ASTEROID!!!!! point : " + pointCount);
 
                             //making list of projectiles to remove
                             //removeProjectileList.add(0, j);
@@ -91,9 +87,7 @@ public class Game extends BasicGameState {
         }
             else
             Menu.paused = false;
-
     }
-
 
         @Override
         public void render (GameContainer gc, StateBasedGame game, Graphics g)throws SlickException {
@@ -130,6 +124,10 @@ public class Game extends BasicGameState {
     }
 
 
+    /**
+     * When player has taken damage
+     * run through void.
+     */
     public void playerIsDMG() {
         if(playerObject.playerLife > 0)
         {
@@ -142,7 +140,6 @@ public class Game extends BasicGameState {
         {
             init.noDMGTimer = 3.01; //reset noDMGTimer to 3
             init.isPlayerHit = false; //continues false until cooldown is gone and true.
-
         }
         init.noDMGTimer -= 0.01; //Counting down from 5 as soon as the void starts
     }
@@ -166,6 +163,9 @@ public class Game extends BasicGameState {
                 break;
             case Input.KEY_TAB:
                 init.showDebugger = toggleDebugger(init.showDebugger);
+                init.showFPS = toggleDebugger(init.showFPS);
+                Main.appgc.setShowFPS(init.showFPS);
+
                 break;
             default:
                 break;
@@ -173,6 +173,12 @@ public class Game extends BasicGameState {
     }
 
     //Toggle method for switching between debugger states
+
+    /**
+     *
+     * @param showDebugger
+     * @return false else, true when TAB is being pressed
+     */
     private boolean toggleDebugger(boolean showDebugger) {
         if(showDebugger) //if debugger is enabled, return false
             return false;
@@ -180,6 +186,10 @@ public class Game extends BasicGameState {
             return true;
     }
 
+    /**
+     *
+     * @return pointCount
+     */
     public int getPoint()
     {
         return pointCount;
