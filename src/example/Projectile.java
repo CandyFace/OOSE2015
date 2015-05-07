@@ -1,5 +1,7 @@
 package example;
 
+import java.awt.Rectangle;
+
 import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
@@ -294,6 +296,10 @@ public class Projectile {
 			
 			position.y = playerPos.y;
 
+		}
+		
+		Rectangle getCollisionBox(Image sprite, int offsetX, int offsetY, int offsetWidth, int offsetHeight) {
+			return new Rectangle((int)position.x+offsetX, (int)position.y+offsetY, sprite.getWidth()+offsetWidth, sprite.getHeight()+offsetHeight);
 		}
 		
 		/**

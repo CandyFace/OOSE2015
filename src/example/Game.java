@@ -84,15 +84,17 @@ public class Game extends BasicGameState {
         if(!Menu.paused) {
             playerObject.update(); // Call update method from Player class
             for(int i = 0; i < asteroids.length; i++){
+            	if(!asteroids[i].destroyed)
+            	{
                 asteroids[i].update(asteroids[i].asteroidSprite);
                 asteroids[i].update();
-
+            	}
                 //Collision detection
                 if (asteroids[i].getCollisionBox(asteroids[i].asteroidSprite,10,10,-20,-20).intersects(playerObject.getCollisionBox(playerObject.playerSprite,5,5,-25,-25)))
                 {
                     //System.out.println("COLLISION");
                     init.isPlayerHit = true;
-
+                    asteroids[i].destroyed = true;
                 }
             }
         }
@@ -125,7 +127,7 @@ public class Game extends BasicGameState {
 
         for(int i = 0; i < asteroids.length; i++){
 
-            asteroids[i].render(asteroids[i].asteroidSprite);
+        	if(!asteroids[i].destroyed) asteroids[i].render(asteroids[i].asteroidSprite);
             projectile.render();
 
 
