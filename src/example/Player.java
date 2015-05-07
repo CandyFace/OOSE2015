@@ -25,7 +25,7 @@ public class Player extends Init{
 		position = new Vector2f();
 		displacement = new Vector2f();
 		scale = 0.8f;
-        tileset = new Image("SpaceShipSheet.png");
+        tileset = new Image("SpaceshipSheet.png");
 		playerSprite = tileset.getSubImage(0, 0, 64, 64);
 
         playerSprite.setCenterOfRotation(playerSprite.getWidth() * scale / 2, playerSprite.getHeight() * scale / 2); //Set the origin of the player sprite
