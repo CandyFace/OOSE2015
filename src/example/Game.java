@@ -153,7 +153,7 @@ public class Game extends BasicGameState {
         if(playerObject.playerLife > 0)
         {
             if( init.noDMGTimer == 2.99) {
-                playerObject.playerLife -= 1; //removes one life from player
+                playerObject.playerLife -= 1;
                 //System.out.println("player has taken a hit");
             }
             //System.out.println("Cooldown: " + init.noDMGTimer);
