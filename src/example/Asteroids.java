@@ -14,6 +14,7 @@ public class Asteroids extends Init {
 	public Image asteroidSprite;
 	private Random rand = new Random();
 	private int rndDir = rand.nextInt(360);
+	public boolean destroyed = false;
 
 	/**
 	 * @param maxSpeed float
