@@ -31,7 +31,8 @@ public class Asteroids extends Init {
 		
 		this.position.x = rndX;
         this.position.y = rndY;
-		scale = 1.0f;
+        scale = rand.nextFloat() + 0.5f;
+		//scale = 1.0f;
 		
 		this.speed = maxSpeed;
 		this._rotationSpeed = maxRotation;
