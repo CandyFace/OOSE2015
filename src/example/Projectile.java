@@ -1,13 +1,6 @@
 package example;
 
-import java.awt.Rectangle;
-
-import java.util.ArrayList;
-import java.util.Random;
-
-
 import org.newdawn.slick.geom.Vector2f;
-import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 //check player position and angle, 
@@ -41,14 +34,12 @@ private int msDist;
 private long lastMs;
 private boolean isJammed;
 	
-	
 	// //
 	// //////////////////////////////////////////////////////////////////////////////////////
 	// /////////////////////////////////////////////////////////////////////////////////////////
 	// constructor
 	public Projectile() throws SlickException {// initialize, list starts empty!
-	
-		
+
 		maxProjectile = 5;
 		
 		projectileCount = 0;
@@ -88,7 +79,6 @@ private boolean isJammed;
 	// /////////////////////////////////////
 	// creating projectileObj, need player position!
 
-
 	public int update(Vector2f playerPos, float playerRotation) throws SlickException {// move
 
 																	// pressed!
@@ -107,8 +97,7 @@ private boolean isJammed;
 		isJammed = false;
 		}
 	//	lastMs;
-		
-		
+
 		//System.out.println("inside projectile update");
 
 		createProjectiles(playerPos, playerRotation);
@@ -141,18 +130,14 @@ private boolean isJammed;
 			while (tempObj != lastObj) {
 				projectileCount++;
 				tempObj = tempObj.getNext();
-
 			}
 			projectileCount++;
-
 		}
-
 		return projectileCount;
 	}
 	
 	public ProjectileObj[] getProjectileObjList(){
-		
-		
+
 		if(projectileCount() != 0){
 		ProjectileObj[] projectileObjList = new ProjectileObj[projectileCount];
 		projectileObjList[0] = firstObj;
@@ -167,9 +152,6 @@ private boolean isJammed;
 		} 
 		return null;
 	}
-	
-	
-
 
 	private void moveProjectiles() {//also checks timer, and maybe delete last projectile
 
@@ -179,7 +161,6 @@ private boolean isJammed;
 			while (tempObj != lastObj) {
 				tempObj.update();
 				tempObj = tempObj.getNext();
-
 			}
 			tempObj.update();//last in list
 			if(tempObj.timer > 300){
@@ -220,7 +201,6 @@ private boolean isJammed;
 			firstObj.setPos(playerPos);
 		}
 		// ////////////////
-
 	}
 
 	// ////////////////////////////////// render
@@ -246,8 +226,5 @@ private boolean isJammed;
 		}
 		return true;
 	}
-	
-	
-
 
 }

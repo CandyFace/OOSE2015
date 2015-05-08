@@ -4,19 +4,14 @@ import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.Animation;
-import org.newdawn.slick.SpriteSheet;
 
 public class Player extends Init{
 
     private boolean keyPressed = false;
     private boolean leftPressed = false;
+    public int playerLife;
+	protected Input input;
 
-    public int playerLife = 3; //How much life should the player start with?
-
-	public Input input;
-
-    //public AnimationSystem aniSys = new AnimationSystem();
 	/**
 	 *
 	 * @throws SlickException
@@ -27,41 +22,33 @@ public class Player extends Init{
     {
 		position = new Vector2f();
 		displacement = new Vector2f();
-		scale = 0.8f;
-        tileset = new Image("graphics/spaceShipSheet.png");
-		playerSprite = tileset.getSubImage(0, 0, 64, 64);
+		scale = 0.8f; //The image is 0.x smaller or 1.x larger than origin.
+        tileset = new Image("SpaceshipSheet.png"); // The spritesheet
+		playerSprite = tileset.getSubImage(0, 0, 64, 64); // the player sprite, taken from a part of the spritesheet
+        playerLife = 3; //How much life should the player start with?
 
         playerSprite.setCenterOfRotation(playerSprite.getWidth() * scale / 2, playerSprite.getHeight() * scale / 2); //Set the origin of the player sprite
+
+        position.x = 300; // Player spawn position on x
+        position.y = 200; // Player spawn position on y
     }
 
-    public void scoreCounter()
-    {
-        //TODO implement an actual score system
-        //The player should only gain 50 points when an asteroid has been destroyed.
-        //Less points could be given when only partly destroyed aka. splitted.
-        if (input.isKeyPressed(Input.KEY_E))
-        {
-            score += 50;
-        }
-    }
-
-
-	/**
-	 * @return void
-	 * used for updating everything in Player class
-	 */
+    /**
+     * @return playerSprite.getRotation()
+     */
 	public float getRotation(){
 		return playerSprite.getRotation();
 		
 	}
-	
+
+    /**
+     * used for updating InputControls and scoreCounter in Player class
+     */
 	public void update(){
-        InputControls();
-        scoreCounter();
+        InputControls(); //Always update inputControls
 	}
 	
 	/**
-	 * @return void
 	 * Controls key inputs for playerMovement
 	 */
 	private void playerMovement() {
@@ -84,14 +71,15 @@ public class Player extends Init{
 
 		position.x += displacement.x;
 		position.y += displacement.y;
-		
+
 		displacement.x *= friction;
         displacement.y *= friction;
 
         //Speed of ship
         //System.out.println("Acceleration: " +calAcceleration(displacement.x,displacement.y)* 10);
 
-	}
+	    }// end of if
+
         if(!keyPressed){
         	speed-= accel * delta;
 			
@@ -107,18 +95,18 @@ public class Player extends Init{
 
 	        //Speed of ship
 	       //System.out.println("Acceleration: " +calAcceleration(displacement.x,displacement.y)* 10);
-	}
+	    }// end of if
 
-	if(leftPressed){
-		//Set player rotation
-		_rotationSpeed = rotationSpeed;
-	}
-	else { // right
-		_rotationSpeed = -rotationSpeed;
-	}
+	    if(leftPressed){
+	    	//Set player rotation
+	    	_rotationSpeed = getRotationSpeed();
+	    }
+	    else { // right
 
-	
-	}
+            _rotationSpeed = -getRotationSpeed();
+	    }
+
+    }//End of playerMovement method
 
     void wrapper(Image sprite){
         //Screen wrap
@@ -128,10 +116,10 @@ public class Player extends Init{
         if(position.x > Main.WIDTH) position.x = 0-(sprite.getWidth()*scale);
     }
 	
-	private double calAcceleration(double a, double b)
-	{
-		return Math.sqrt(Math.pow(a,2) + Math.pow(b,2));
-	}
+//	private double calAcceleration(double a, double b)
+//	{
+//		return Math.sqrt(Math.pow(a,2) + Math.pow(b,2));
+//	}
 
     private void InputControls()
     {
@@ -151,6 +139,5 @@ public class Player extends Init{
             leftPressed = false;
         }
         else _rotationSpeed = 0; //player stops rotating when nothing is pressed.
-
     }
 }

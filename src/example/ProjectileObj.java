@@ -6,8 +6,6 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
 
-
-
 public class ProjectileObj {// should hold angle and position and timer
 	
 	public Image projectileSprite;
@@ -16,7 +14,7 @@ public class ProjectileObj {// should hold angle and position and timer
 	private ProjectileObj nextObj;
 	private ProjectileObj prevObj;
 	// public
-public int timer;
+    public int timer;
 	protected Vector2f position, displacement;
 	protected float scale;
 	protected float rotation;// rotation is always zero unless a or d is
@@ -29,7 +27,7 @@ public int timer;
 	// constructors ///
 	public ProjectileObj(ProjectileObj nextObj) throws SlickException {
 		
-		projectileSprite = new Image("graphics/fire.png");
+		projectileSprite = new Image("fire.png");
 		scale = 0.8f;
 
 		projectileSprite.setCenterOfRotation(projectileSprite.getWidth()
@@ -48,7 +46,7 @@ public int timer;
 
 	public ProjectileObj() throws SlickException {
 		
-		projectileSprite = new Image("graphics/fire.png");
+		projectileSprite = new Image("fire.png");
 		scale = 0.8f;
 
 		projectileSprite.setCenterOfRotation(projectileSprite.getWidth()
@@ -70,8 +68,6 @@ public int timer;
 		return new Rectangle((int)position.x+offsetX, (int)position.y+offsetY, sprite.getWidth()+offsetWidth, sprite.getHeight()+offsetHeight);
 	}
 	
-	
-	
 	public void setPos(Vector2f playerPos) {
 		float speed = 5;
 		float delta = 2;
@@ -87,7 +83,6 @@ public int timer;
 		position.x = playerPos.x;
 		
 		position.y = playerPos.y;
-
 	}
 
 	public void setRotation(float playerRotation) {
@@ -109,8 +104,7 @@ public int timer;
 	}
 
 	public void update() {// moves projectiles
-//check if timer has run out.... 
-		
+//check if timer has run out....
 		
 		wrapper();
 
@@ -125,9 +119,8 @@ public int timer;
 		position.x += displacement.x;
 		position.y += displacement.y;
 
-	timer++;
+	    timer++;
 	}
-
 
 	void wrapper() {
 		Image sprite = projectileSprite;
@@ -154,8 +147,6 @@ public int timer;
 		sprite.draw(position.x, position.y, scale);
 		
 	//System.out.println(sprite);
-
 	}
-
 }
 

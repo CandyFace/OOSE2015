@@ -5,8 +5,6 @@ import java.util.Random;
 import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.Animation;
-import org.newdawn.slick.SpriteSheet;
 
 public class Asteroids extends Init {
 	
@@ -37,10 +35,9 @@ public class Asteroids extends Init {
 		this.speed = maxSpeed;
 		this._rotationSpeed = maxRotation;
 		
-		tileset = new Image("graphics/AsteroidL1.png");
+		tileset = new Image("AsteroidL1.png");
 		asteroidSprite = tileset.getSubImage(0, 0, 64, 64);
 		asteroidSprite.setCenterOfRotation(asteroidSprite.getWidth() * scale / 2, asteroidSprite.getHeight() * scale / 2);
-
 	}
 	
 	/**
